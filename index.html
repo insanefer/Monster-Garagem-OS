@@ -6,18 +6,17 @@
 <title>Monster Garage — Ordens de Serviço</title>
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&family=Orbitron:wght@400;600;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg0:#080909; --bg1:#0d0f10; --bg2:#131618; --bg3:#1a1e21; --bg4:#222629;
-  --line:#2a2e32; --line2:#353a3f;
-  --steel:#8a9299; --chrome:#c4cdd6; --white:#e8ecf0;
-  --accent:#a8b8c8; --accent2:#6e8494;
-  --glow:rgba(168,184,200,0.08);
-  --green:#3d9970; --green-dim:rgba(61,153,112,0.15);
-  --yellow:#b8a040; --yellow-dim:rgba(184,160,64,0.15);
-  --blue:#4a7fa8; --blue-dim:rgba(74,127,168,0.15);
-  --purple:#7a5fa8; --purple-dim:rgba(122,95,168,0.15);
-  --teal:#3a8a80; --teal-dim:rgba(58,138,128,0.15);
-  --red:#8a3030; --red-bright:#c44040;
+:root{
+  --bg0:#080909;--bg1:#0d0f10;--bg2:#131618;--bg3:#1a1e21;--bg4:#222629;
+  --line:#2a2e32;--line2:#353a3f;
+  --steel:#8a9299;--chrome:#c4cdd6;--white:#e8ecf0;
+  --accent:#a8b8c8;--accent2:#6e8494;
+  --green:#3d9970;--green-dim:rgba(61,153,112,.15);
+  --yellow:#b8a040;--yellow-dim:rgba(184,160,64,.15);
+  --blue:#4a7fa8;--blue-dim:rgba(74,127,168,.15);
+  --purple:#7a5fa8;--purple-dim:rgba(122,95,168,.15);
+  --teal:#3a8a80;--teal-dim:rgba(58,138,128,.15);
+  --red:#8a3030;--red-bright:#c44040;
   --scratch:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
@@ -25,8 +24,6 @@ body{background:var(--bg0);color:var(--white);font-family:'DM Sans',sans-serif;f
   background-image:repeating-linear-gradient(90deg,transparent 0,transparent 79px,rgba(255,255,255,.012) 79px,rgba(255,255,255,.012) 80px),repeating-linear-gradient(0deg,transparent 0,transparent 79px,rgba(255,255,255,.012) 79px,rgba(255,255,255,.012) 80px)}
 body::before{content:'';position:fixed;inset:0;background-image:var(--scratch);pointer-events:none;z-index:0;opacity:.4}
 ::-webkit-scrollbar{width:5px;height:5px}::-webkit-scrollbar-track{background:var(--bg1)}::-webkit-scrollbar-thumb{background:var(--bg4)}::-webkit-scrollbar-thumb:hover{background:var(--accent2)}
-
-/* HEADER */
 .header{position:sticky;top:0;z-index:100;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;background-image:linear-gradient(180deg,#161a1d 0%,#0d0f10 100%);box-shadow:0 1px 0 var(--line2),0 4px 24px rgba(0,0,0,.6);border-bottom:1px solid var(--line)}
 .logo{display:flex;align-items:center;gap:14px}
 .logo-mark{width:38px;height:38px;background:linear-gradient(135deg,#2a2e32,#1a1e21);border:1px solid var(--line2);display:flex;align-items:center;justify-content:center;font-size:18px;clip-path:polygon(8% 0%,92% 0%,100% 50%,92% 100%,8% 100%,0% 50%);box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
@@ -34,17 +31,11 @@ body::before{content:'';position:fixed;inset:0;background-image:var(--scratch);p
 .logo-name em{color:var(--accent);font-style:normal}
 .logo-tagline{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--accent2);letter-spacing:3px;text-transform:uppercase;margin-top:3px}
 .header-meta{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--accent2);text-align:right;letter-spacing:1px;line-height:1.8}
-
-/* NAV */
 .nav{background:var(--bg1);border-bottom:1px solid var(--line);padding:0 28px;display:flex;gap:2px;position:sticky;top:60px;z-index:99}
 .nav-tab{padding:13px 22px;font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--steel);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;transition:all .2s;position:relative}
 .nav-tab::after{content:'';position:absolute;bottom:-1px;left:50%;right:50%;height:2px;background:var(--chrome);transition:all .25s}
 .nav-tab:hover{color:var(--accent)}.nav-tab.active{color:var(--white)}.nav-tab.active::after{left:0;right:0}
-
-/* LAYOUT */
 .wrap{max-width:1340px;margin:0 auto;padding:24px 28px;position:relative;z-index:1}
-
-/* STATS */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:22px}
 .stat{background:var(--bg2);border:1px solid var(--line);padding:14px 18px;position:relative;overflow:hidden;transition:border-color .2s}
 .stat:hover{border-color:var(--line2)}
@@ -60,34 +51,29 @@ body::before{content:'';position:fixed;inset:0;background-image:var(--scratch);p
 .stat-val.col-y{background:linear-gradient(135deg,#d4b840,#8a7020);-webkit-background-clip:text;background-clip:text}
 .stat-val.col-b{background:linear-gradient(135deg,#6aaad4,#3a6080);-webkit-background-clip:text;background-clip:text}
 .stat-val.col-g{background:linear-gradient(135deg,#4dbf8a,#2a7050);-webkit-background-clip:text;background-clip:text}
-
-/* TOOLBAR */
 .toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;gap:12px;flex-wrap:wrap}
 .filter-row{display:flex;gap:6px;flex-wrap:wrap}
 .pill{padding:5px 14px;font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;border:1px solid var(--line2);color:var(--steel);background:transparent;transition:all .15s}
 .pill:hover{color:var(--chrome);border-color:var(--accent2)}
-.pill.active{background:var(--bg3);color:var(--white);border-color:var(--chrome);box-shadow:inset 0 0 0 1px rgba(255,255,255,.04)}
+.pill.active{background:var(--bg3);color:var(--white);border-color:var(--chrome)}
 .search-wrap{display:flex;align-items:center;gap:8px;background:var(--bg2);border:1px solid var(--line);padding:7px 14px;flex:1;max-width:380px;transition:border-color .2s}
 .search-wrap:focus-within{border-color:var(--accent2)}
 .search-wrap input{background:none;border:none;outline:none;color:var(--white);font-family:'DM Sans',sans-serif;font-size:13px;width:100%}
 .search-wrap input::placeholder{color:var(--bg4)}
-.search-icon{color:var(--bg4);font-size:13px}
 .right-tools{display:flex;gap:8px;align-items:center}
-
-/* BUTTONS */
 .btn{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:12px;letter-spacing:2px;text-transform:uppercase;padding:8px 20px;cursor:pointer;border:none;transition:all .2s;display:inline-flex;align-items:center;gap:6px;position:relative;overflow:hidden}
 .btn::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.06),transparent);pointer-events:none}
 .btn-metal{background:linear-gradient(180deg,#2e3438 0%,#1e2326 100%);color:var(--chrome);border:1px solid var(--line2);box-shadow:0 1px 0 rgba(255,255,255,.04) inset,0 2px 6px rgba(0,0,0,.4)}
 .btn-metal:hover{background:linear-gradient(180deg,#383e43 0%,#262c30 100%);color:var(--white);border-color:var(--accent2)}
 .btn-steel{background:linear-gradient(180deg,#3a4248 0%,#252b30 100%);color:var(--white);border:1px solid var(--accent2);box-shadow:0 0 16px rgba(168,184,200,.08),inset 0 1px 0 rgba(255,255,255,.06)}
-.btn-steel:hover{background:linear-gradient(180deg,#454d54 0%,#2e363c 100%);box-shadow:0 0 24px rgba(168,184,200,.16),inset 0 1px 0 rgba(255,255,255,.08)}
+.btn-steel:hover{background:linear-gradient(180deg,#454d54 0%,#2e363c 100%)}
 .btn-ghost{background:transparent;color:var(--steel);border:1px solid var(--line2)}
 .btn-ghost:hover{color:var(--chrome);background:var(--bg3)}
+.btn-green{background:linear-gradient(180deg,#2a6644 0%,#1a4430 100%);color:#4dbf8a;border:1px solid rgba(61,153,112,.4)}
+.btn-green:hover{background:linear-gradient(180deg,#336655 0%,#224433 100%);color:#6ddfa0}
 .btn-sm{padding:5px 12px;font-size:10px}
 .btn-danger{background:transparent;color:var(--red);border:1px solid rgba(138,48,48,.4);font-size:10px;padding:4px 10px}
 .btn-danger:hover{background:var(--red);color:var(--white);border-color:var(--red-bright)}
-
-/* TABLE */
 .table-shell{background:var(--bg1);border:1px solid var(--line);overflow:hidden;border-top:1px solid var(--line2)}
 table{width:100%;border-collapse:collapse}
 thead{background:linear-gradient(180deg,var(--bg3) 0%,var(--bg2) 100%)}
@@ -97,33 +83,43 @@ tr:last-child td{border-bottom:none}
 tbody tr{transition:background .12s}
 tbody tr:hover td{background:rgba(255,255,255,.018)}
 .os-num{font-family:'Orbitron',monospace;font-size:14px;font-weight:700;color:var(--chrome);letter-spacing:1px}
-.plate{font-family:'Share Tech Mono',monospace;font-size:13px;letter-spacing:3px;color:var(--chrome);background:var(--bg3);border:1px solid var(--line2);padding:3px 9px;display:inline-block}
-
-/* BADGES */
+.plate{font-family:'Share Tech Mono',monospace;font-size:12px;letter-spacing:3px;color:var(--chrome);background:var(--bg3);border:1px solid var(--line2);padding:2px 7px;display:inline-block}
 .badge{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;border:1px solid}
 .badge-w{color:var(--yellow);background:var(--yellow-dim);border-color:rgba(184,160,64,.3)}
 .badge-a{color:#6aaad4;background:var(--blue-dim);border-color:rgba(74,127,168,.3)}
 .badge-c{color:#4dbf8a;background:var(--green-dim);border-color:rgba(61,153,112,.3)}
 .badge-e{color:var(--steel);background:var(--bg3);border-color:var(--line2)}
+.badge-pago{color:#4dbf8a;background:rgba(61,153,112,.12);border-color:rgba(61,153,112,.3)}
+.badge-parcial{color:var(--yellow);background:var(--yellow-dim);border-color:rgba(184,160,64,.3)}
+.badge-aberto{color:#c44040;background:rgba(196,64,64,.1);border-color:rgba(196,64,64,.3)}
+.badge-nf{color:#4dbf8a;background:rgba(61,153,112,.1);border-color:rgba(61,153,112,.25);font-size:9px;padding:2px 7px}
+.badge-nf-p{color:var(--steel);background:var(--bg3);border-color:var(--line2);font-size:9px;padding:2px 7px}
 .dot{width:5px;height:5px;border-radius:50%;background:currentColor}
 .badge-a .dot,.badge-w .dot{animation:blink 2s ease infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
-
-/* CLIENT AUTOCOMPLETE DROPDOWN */
+/* AUTOCOMPLETE */
 .cl-search-wrap{position:relative}
-.cl-dropdown{position:absolute;top:100%;left:0;right:0;background:var(--bg2);border:1px solid var(--accent2);border-top:none;z-index:300;max-height:200px;overflow-y:auto;display:none}
+.cl-dropdown{position:absolute;top:100%;left:0;right:0;background:var(--bg2);border:1px solid var(--accent2);border-top:none;z-index:500;max-height:220px;overflow-y:auto;display:none}
 .cl-dropdown.open{display:block}
 .cl-opt{padding:9px 12px;cursor:pointer;font-size:13px;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:2px;transition:background .1s}
-.cl-opt:last-child{border-bottom:none}
 .cl-opt:hover{background:var(--bg3)}
 .cl-opt-name{color:var(--white);font-weight:500}
 .cl-opt-meta{color:var(--steel);font-size:11px;font-family:'Share Tech Mono',monospace}
 .cl-opt-new{color:var(--accent2);font-style:italic}
-
+/* VEHICLE SELECT */
+.veh-select-wrap{display:none;margin-top:8px}
+.veh-select-wrap.open{display:block}
+.veh-opts{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.veh-opt{padding:7px 14px;background:var(--bg3);border:1px solid var(--line2);cursor:pointer;font-size:12px;transition:all .15s;display:flex;flex-direction:column;gap:2px;min-width:140px}
+.veh-opt:hover{border-color:var(--accent2)}
+.veh-opt.selected{border-color:var(--chrome);background:var(--bg4)}
+.veh-opt-plate{font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--chrome)}
+.veh-opt-model{font-size:12px;color:var(--white)}
+.veh-opt-year{font-size:10px;color:var(--steel)}
 /* MODAL */
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:200;display:flex;align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto;backdrop-filter:blur(6px) saturate(.5);opacity:0;pointer-events:none;transition:opacity .25s}
 .overlay.open{opacity:1;pointer-events:all}
-.modal{background:var(--bg2);border:1px solid var(--line2);width:100%;max-width:900px;margin:auto;transform:translateY(16px);transition:transform .25s;border-left:2px solid var(--line2);box-shadow:0 24px 80px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.03)}
+.modal{background:var(--bg2);border:1px solid var(--line2);width:100%;max-width:960px;margin:auto;transform:translateY(16px);transition:transform .25s;border-left:2px solid var(--line2);box-shadow:0 24px 80px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.03)}
 .overlay.open .modal{transform:translateY(0)}
 .modal-top{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;border-bottom:1px solid var(--line2);background:linear-gradient(180deg,var(--bg3) 0%,var(--bg2) 100%)}
 .modal-title{font-family:'Orbitron',monospace;font-size:16px;font-weight:700;letter-spacing:3px;color:var(--chrome)}
@@ -132,11 +128,11 @@ tbody tr:hover td{background:rgba(255,255,255,.018)}
 .close-btn:hover{background:var(--red);color:var(--white);border-color:var(--red-bright)}
 .modal-body{padding:26px 28px}
 .modal-foot{display:flex;justify-content:flex-end;gap:8px;padding:14px 24px;border-top:1px solid var(--line);background:var(--bg1)}
-
 /* FORM */
 .fsec{margin-bottom:26px}
-.fsec-title{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--accent2);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px}
-.fsec-title::before{content:'';width:3px;height:12px;background:linear-gradient(180deg,var(--chrome),var(--accent2));display:inline-block}
+.fsec-title{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--accent2);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}
+.fsec-title-left{display:flex;align-items:center;gap:8px}
+.fsec-title-left::before{content:'';width:3px;height:12px;background:linear-gradient(180deg,var(--chrome),var(--accent2));display:inline-block}
 .fgrid{display:grid;gap:12px}
 .g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:1fr 1fr 1fr}.g4{grid-template-columns:1fr 1fr 1fr 1fr}
 .sp2{grid-column:span 2}.sp3{grid-column:span 3}.sp4{grid-column:span 4}
@@ -147,100 +143,101 @@ input:focus,select:focus,textarea:focus{border-color:var(--accent2);box-shadow:0
 select option{background:var(--bg2)}
 textarea{resize:vertical;min-height:72px;line-height:1.6}
 input::placeholder,textarea::placeholder{color:var(--bg4)}
-
 /* SVC TABLE */
 .svc-shell{border:1px solid var(--line);overflow:hidden;margin-top:8px}
-.svc-shell table{width:100%}
 .svc-shell th{font-size:8px;padding:7px 11px;background:var(--bg3)}
 .svc-shell td{padding:7px 11px;border-bottom:1px solid var(--line);font-size:12px}
 .svc-shell tr:last-child td{border-bottom:none}
 .svc-add{display:flex;gap:6px;align-items:center;padding:8px 11px;background:var(--bg3);border-top:1px solid var(--line)}
 .svc-add input,.svc-add select{padding:5px 8px;font-size:12px}
-.totals-bar{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:var(--bg1);border:1px solid var(--line);border-top:none}
+.totals-bar{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:var(--bg1);border:1px solid var(--line);border-top:none;flex-wrap:wrap;gap:8px}
 .totals-breakdown{font-size:11px;color:var(--steel);font-family:'Share Tech Mono',monospace;line-height:1.8}
 .totals-breakdown span{color:var(--chrome)}
-.grand-total{font-family:'Orbitron',monospace;font-weight:700;font-size:22px;background:linear-gradient(135deg,var(--white),var(--steel));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:1px}
-
-/* TIPO COLOR CHIPS */
+.grand-total{font-family:'Orbitron',monospace;font-weight:700;font-size:22px;background:linear-gradient(135deg,var(--white),var(--steel));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .tp-sta{color:#6aaad4}.tp-pca{color:var(--yellow)}.tp-ret{color:#9a7ad4}.tp-out{color:var(--teal)}
-
 /* CHECKLIST */
 .checklist{display:flex;flex-direction:column;gap:6px}
 .chk{display:flex;align-items:center;gap:10px;padding:9px 13px;background:var(--bg1);border:1px solid var(--line);cursor:pointer;transition:all .15s;user-select:none}
 .chk:hover{border-color:var(--line2)}
 .chk.done{border-color:rgba(61,153,112,.25);background:rgba(61,153,112,.04)}
-.chk-box{width:16px;height:16px;border:1px solid var(--line2);display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;transition:all .15s;font-family:'Share Tech Mono',monospace}
+.chk-box{width:16px;height:16px;border:1px solid var(--line2);display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;font-family:'Share Tech Mono',monospace}
 .chk.done .chk-box{background:var(--green);border-color:var(--green);color:#000}
-.chk-lbl{flex:1;font-size:12px}
-.chk.done .chk-lbl{text-decoration:line-through;color:var(--steel)}
-
+.chk-lbl{flex:1;font-size:12px}.chk.done .chk-lbl{text-decoration:line-through;color:var(--steel)}
+/* PAGAMENTOS */
+.pag-row{display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--bg1);border:1px solid var(--line);margin-bottom:6px}
+.pag-forma{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--accent2);letter-spacing:1px;min-width:100px}
+.pag-val{font-family:'Orbitron',monospace;font-size:14px;color:var(--green);min-width:90px}
+.pag-data{font-size:11px;color:var(--steel);flex:1}
+/* CAIXA PROPRIO */
+.caixa-row{display:flex;align-items:center;gap:8px;padding:8px 12px;background:rgba(196,64,64,.05);border:1px solid rgba(196,64,64,.2);margin-bottom:6px}
+.caixa-desc{flex:1;font-size:12px}
+.caixa-val{font-family:'Orbitron',monospace;font-size:13px;color:#c44040;min-width:80px}
 /* EMPTY */
 .empty{padding:60px 20px;text-align:center}
 .empty-ico{font-size:40px;opacity:.15;margin-bottom:12px;display:block}
 .empty-txt{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--steel)}
-
 /* CLIENT CARDS */
-.client-card{background:var(--bg2);border:1px solid var(--line);padding:14px 18px;display:flex;align-items:center;gap:14px;margin-bottom:8px;transition:border-color .15s}
+.client-card{background:var(--bg2);border:1px solid var(--line);padding:14px 18px;margin-bottom:8px;transition:border-color .15s}
 .client-card:hover{border-color:var(--line2)}
+.client-card-top{display:flex;align-items:center;gap:14px}
 .c-avatar{width:42px;height:42px;background:var(--bg3);border:1px solid var(--line2);display:flex;align-items:center;justify-content:center;font-family:'Orbitron',monospace;font-size:14px;font-weight:700;color:var(--chrome);flex-shrink:0;clip-path:polygon(8% 0%,92% 0%,100% 50%,92% 100%,8% 100%,0% 50%)}
-.c-info{flex:1}
-.c-name{font-size:15px;font-weight:500;margin-bottom:3px;color:var(--white)}
+.c-info{flex:1}.c-name{font-size:15px;font-weight:500;margin-bottom:3px;color:var(--white)}
 .c-meta{font-size:11px;color:var(--steel)}
 .c-stats{text-align:right;margin-right:12px}
 .c-count{font-family:'Orbitron',monospace;font-size:20px;font-weight:700;color:var(--chrome)}
 .c-lbl{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--steel)}
-
+/* VEHICLE TAGS IN CLIENT CARD */
+.veh-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;padding-top:10px;border-top:1px solid var(--line)}
+.veh-tag{display:flex;align-items:center;gap:8px;padding:6px 10px;background:var(--bg3);border:1px solid var(--line2);font-size:11px}
+.veh-tag-plate{font-family:'Share Tech Mono',monospace;letter-spacing:2px;color:var(--chrome);font-size:11px}
+.veh-tag-info{color:var(--steel)}
 /* PAGES */
-.page{display:none}
-.page.active{display:block;animation:fadeUp .2s ease}
+.page{display:none}.page.active{display:block;animation:fadeUp .2s ease}
 @keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 .acts{display:flex;gap:5px}
-
-/* ── FINANCEIRO ── */
+/* FINANCEIRO */
 .fin-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:18px}
 .fin-card{background:var(--bg2);border:1px solid var(--line);padding:16px 18px;position:relative;overflow:hidden}
 .fin-card-bar{position:absolute;bottom:0;left:0;right:0;height:3px}
 .fin-card-bar.sta{background:linear-gradient(90deg,var(--blue),transparent)}
 .fin-card-bar.pca{background:linear-gradient(90deg,var(--yellow),transparent)}
 .fin-card-bar.ret{background:linear-gradient(90deg,var(--purple),transparent)}
-.fin-card-bar.out{background:linear-gradient(90deg,var(--teal),transparent)}
 .fin-card-bar.tot{background:linear-gradient(90deg,var(--chrome),transparent)}
+.fin-card-bar.rec{background:linear-gradient(90deg,var(--green),transparent)}
+.fin-card-bar.dev{background:linear-gradient(90deg,#c44040,transparent)}
+.fin-card-bar.cxa{background:linear-gradient(90deg,#c44040,transparent)}
 .fin-card-lbl{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--steel);margin-bottom:6px}
-.fin-card-val{font-family:'Orbitron',monospace;font-weight:700;font-size:22px;line-height:1}
+.fin-card-val{font-family:'Orbitron',monospace;font-weight:700;font-size:20px;line-height:1}
 .fin-card-val.blue{background:linear-gradient(135deg,#6aaad4,#3a6080);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .fin-card-val.yellow{background:linear-gradient(135deg,#d4b840,#8a7020);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .fin-card-val.purple{background:linear-gradient(135deg,#b090e8,#6040a0);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.fin-card-val.teal{background:linear-gradient(135deg,#50c0b0,#2a7068);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .fin-card-val.chrome{background:linear-gradient(135deg,var(--chrome),var(--steel));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.fin-card-val.green{background:linear-gradient(135deg,#4dbf8a,#2a7050);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.fin-card-val.red{background:linear-gradient(135deg,#c44040,#8a2020);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .fin-card-sub{font-size:11px;color:var(--steel);margin-top:4px}
-
 .fin-section{background:var(--bg2);border:1px solid var(--line);padding:20px;margin-bottom:14px}
 .fin-section-title{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--accent2);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--line)}
-
 .fin-filter{display:flex;gap:8px;align-items:center;margin-bottom:18px;flex-wrap:wrap}
 .fin-filter select{width:auto;padding:7px 12px;font-size:12px}
-.fin-filter label{font-size:10px}
-
 .month-bar{display:flex;align-items:flex-end;gap:6px;height:120px;margin-top:12px}
 .month-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px}
-.month-col-bar{width:100%;background:linear-gradient(180deg,var(--accent),var(--accent2));border-radius:0;min-height:4px;transition:height .3s}
+.month-col-bar{width:100%;background:linear-gradient(180deg,var(--accent),var(--accent2));min-height:4px;transition:height .3s}
 .month-col-lbl{font-family:'Share Tech Mono',monospace;font-size:8px;color:var(--steel);letter-spacing:1px}
 .month-col-val{font-family:'Orbitron',monospace;font-size:9px;color:var(--chrome)}
-
-.os-row-fin{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);font-size:12px}
+.os-row-fin{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);font-size:12px;flex-wrap:wrap;gap:6px}
 .os-row-fin:last-child{border-bottom:none}
-
-/* REPORT */
-.rep-box{background:var(--bg2);border:1px solid var(--line);padding:22px;margin-bottom:14px}
-.rep-box-title{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--accent2);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--line)}
 .bar-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
 .bar-lbl{flex:1;font-size:12px;color:var(--chrome)}
 .bar-track{flex:3;background:var(--bg3);height:6px;border:1px solid var(--line)}
 .bar-fill{height:100%;background:linear-gradient(90deg,var(--chrome),var(--steel))}
 .bar-count{font-family:'Orbitron',monospace;font-size:14px;color:var(--chrome);width:24px;text-align:right}
-
-/* ENTRADA BADGE */
+.rep-box{background:var(--bg2);border:1px solid var(--line);padding:22px;margin-bottom:14px}
+.rep-box-title{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--accent2);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--line)}
 .entrada-tag{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--accent2);letter-spacing:1px}
+/* DEVEDOR ROW */
+.dev-row{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:rgba(196,64,64,.04);border:1px solid rgba(196,64,64,.15);margin-bottom:6px}
+.dev-row:last-child{margin-bottom:0}
+.cxa-item{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:rgba(196,64,64,.04);border:1px solid rgba(196,64,64,.15);margin-bottom:6px}
 </style>
 </head>
 <body>
@@ -268,7 +265,7 @@ input::placeholder,textarea::placeholder{color:var(--bg4)}
 
 <div class="wrap">
 
-  <!-- PAGE: OS -->
+  <!-- PAGE OS -->
   <div class="page active" id="page-os">
     <div class="stats">
       <div class="stat"><div class="stat-bar s1"></div><div class="stat-lbl">Aguardando</div><div class="stat-val col-y" id="sv-wait">0</div></div>
@@ -285,10 +282,7 @@ input::placeholder,textarea::placeholder{color:var(--bg4)}
         <button class="pill" onclick="setFilter('entregue',this)">Entregues</button>
       </div>
       <div class="right-tools">
-        <div class="search-wrap">
-          <span class="search-icon">◎</span>
-          <input id="sq" type="text" placeholder="Buscar cliente, placa, modelo…" oninput="renderOS()">
-        </div>
+        <div class="search-wrap"><span style="color:var(--bg4)">◎</span><input id="sq" type="text" placeholder="Buscar cliente, placa, modelo…" oninput="renderOS()"></div>
         <button class="btn btn-steel" onclick="openOS()">＋ Nova OS</button>
       </div>
     </div>
@@ -296,7 +290,7 @@ input::placeholder,textarea::placeholder{color:var(--bg4)}
       <table>
         <thead><tr>
           <th>OS</th><th>Entrada</th><th>Cliente</th><th>Veículo</th><th>Placa</th>
-          <th>Serviços</th><th>Status</th><th>Total</th><th>Ações</th>
+          <th>Status OS</th><th>Pagamento</th><th>NF</th><th>Total</th><th>Ações</th>
         </tr></thead>
         <tbody id="os-body"></tbody>
       </table>
@@ -304,49 +298,45 @@ input::placeholder,textarea::placeholder{color:var(--bg4)}
     </div>
   </div>
 
-  <!-- PAGE: CLIENTES -->
+  <!-- PAGE CLIENTES -->
   <div class="page" id="page-cl">
     <div class="toolbar">
-      <div class="search-wrap"><span class="search-icon">◎</span><input id="cq" type="text" placeholder="Buscar cliente…" oninput="renderClients()"></div>
+      <div class="search-wrap"><span style="color:var(--bg4)">◎</span><input id="cq" type="text" placeholder="Buscar cliente…" oninput="renderClients()"></div>
       <button class="btn btn-steel" onclick="openCL()">＋ Novo Cliente</button>
     </div>
     <div id="cl-list"></div>
     <div class="empty" id="cl-empty" style="display:none"><span class="empty-ico">◈</span><div class="empty-txt">Nenhum cliente cadastrado</div></div>
   </div>
 
-  <!-- PAGE: FINANCEIRO -->
+  <!-- PAGE FINANCEIRO -->
   <div class="page" id="page-fin">
     <div class="fin-filter">
-      <div class="fg" style="flex-direction:row;align-items:center;gap:8px">
-        <label>Período:</label>
-        <select id="fin-mes" onchange="renderFin()">
-          <option value="0">Todos os meses</option>
-          <option value="1">Janeiro</option><option value="2">Fevereiro</option><option value="3">Março</option>
-          <option value="4">Abril</option><option value="5">Maio</option><option value="6">Junho</option>
-          <option value="7">Julho</option><option value="8">Agosto</option><option value="9">Setembro</option>
-          <option value="10">Outubro</option><option value="11">Novembro</option><option value="12">Dezembro</option>
-        </select>
-        <select id="fin-ano" onchange="renderFin()"></select>
-        <select id="fin-status" onchange="renderFin()">
-          <option value="all">Todos os status</option>
-          <option value="concluida">Concluídas</option>
-          <option value="entregue">Entregues</option>
-          <option value="andamento">Em Andamento</option>
-          <option value="aguardando">Aguardando</option>
-        </select>
-      </div>
+      <select id="fin-mes" onchange="renderFin()">
+        <option value="0">Todos os meses</option>
+        <option value="1">Janeiro</option><option value="2">Fevereiro</option><option value="3">Março</option>
+        <option value="4">Abril</option><option value="5">Maio</option><option value="6">Junho</option>
+        <option value="7">Julho</option><option value="8">Agosto</option><option value="9">Setembro</option>
+        <option value="10">Outubro</option><option value="11">Novembro</option><option value="12">Dezembro</option>
+      </select>
+      <select id="fin-ano" onchange="renderFin()"></select>
+      <select id="fin-status" onchange="renderFin()">
+        <option value="all">Todos os status</option>
+        <option value="concluida">Concluídas</option>
+        <option value="entregue">Entregues</option>
+        <option value="andamento">Em Andamento</option>
+        <option value="aguardando">Aguardando</option>
+      </select>
     </div>
-
-    <!-- CARDS RECEITA POR TIPO -->
+    <!-- Cards principais -->
     <div class="fin-grid" id="fin-cards"></div>
-
-    <!-- GRÁFICO MENSAL -->
+    <!-- Segunda linha de cards -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px" id="fin-cards2"></div>
+    <!-- Gráfico -->
     <div class="fin-section">
       <div class="fin-section-title">◎ Faturamento Mensal — Últimos 6 meses</div>
       <div class="month-bar" id="fin-chart"></div>
     </div>
-
-    <!-- BREAKDOWN POR TIPO -->
+    <!-- Breakdown + indicadores -->
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
       <div class="fin-section" style="margin-bottom:0">
         <div class="fin-section-title">◈ Receita por Categoria</div>
@@ -357,15 +347,29 @@ input::placeholder,textarea::placeholder{color:var(--bg4)}
         <div id="fin-indicadores"></div>
       </div>
     </div>
-
-    <!-- LISTA DE OS DO PERÍODO -->
+    <!-- Devedores -->
+    <div class="fin-section">
+      <div class="fin-section-title">⚠ Pagamentos em Aberto / Parcial</div>
+      <div id="fin-devedores"></div>
+    </div>
+    <!-- Caixa Victor -->
+    <div class="fin-section">
+      <div class="fin-section-title">💰 Saídas do Caixa (Victor) — Aguardando Reembolso</div>
+      <div id="fin-caixa"></div>
+    </div>
+    <!-- NF pendentes -->
+    <div class="fin-section">
+      <div class="fin-section-title">📄 OS sem Nota Fiscal Emitida</div>
+      <div id="fin-nf-pend"></div>
+    </div>
+    <!-- Lista OS -->
     <div class="fin-section">
       <div class="fin-section-title">◈ Ordens no Período</div>
       <div id="fin-os-list"></div>
     </div>
   </div>
 
-  <!-- PAGE: RELATÓRIO -->
+  <!-- PAGE RELATORIO -->
   <div class="page" id="page-rp">
     <div class="stats" style="grid-template-columns:repeat(3,1fr);margin-bottom:22px">
       <div class="stat"><div class="stat-bar s4"></div><div class="stat-lbl">Total de OS</div><div class="stat-val" id="rp-tot">0</div></div>
@@ -376,9 +380,9 @@ input::placeholder,textarea::placeholder{color:var(--bg4)}
     <div class="rep-box"><div class="rep-box-title">◈ Serviços mais executados</div><div id="rp-svcs"></div></div>
   </div>
 
-</div><!-- /wrap -->
+</div>
 
-<!-- MODAL: OS -->
+<!-- ══ MODAL: OS ══ -->
 <div class="overlay" id="m-os">
   <div class="modal">
     <div class="modal-top">
@@ -389,28 +393,35 @@ input::placeholder,textarea::placeholder{color:var(--bg4)}
 
       <!-- CLIENTE -->
       <div class="fsec">
-        <div class="fsec-title">Dados do cliente &amp; veículo</div>
+        <div class="fsec-title"><div class="fsec-title-left">Cliente &amp; Veículo</div></div>
         <div class="fgrid g2">
           <div class="fg">
             <label>Cliente *</label>
             <div class="cl-search-wrap">
-              <input id="f-cli" placeholder="Digite o nome ou selecione um cliente…" autocomplete="off" oninput="clSearch(this.value)" onfocus="clSearch(this.value)">
+              <input id="f-cli" placeholder="Digite o nome ou selecione…" autocomplete="off" oninput="clSearch(this.value)" onfocus="clSearch(this.value)">
               <div class="cl-dropdown" id="cl-drop"></div>
             </div>
           </div>
-          <div class="fg"><label>Telefone</label><input id="f-tel" placeholder="(11) 99999-9999"></div>
-          <div class="fg"><label>Modelo do Veículo *</label><input id="f-mod" placeholder="Ex: VW Gol, Honda Civic…"></div>
+          <div class="fg"><label>Telefone</label><input id="f-tel" placeholder="(11) 99999-9999" readonly></div>
+        </div>
+        <!-- Seleção de veículo -->
+        <div class="veh-select-wrap" id="veh-select-wrap">
+          <label>Selecione o Veículo</label>
+          <div class="veh-opts" id="veh-opts"></div>
+        </div>
+        <div class="fgrid g4" style="margin-top:12px">
+          <div class="fg sp2"><label>Modelo do Veículo *</label><input id="f-mod" placeholder="Ex: VW Gol, Honda Civic…"></div>
           <div class="fg"><label>Placa *</label><input id="f-plc" placeholder="ABC-1234" oninput="this.value=this.value.toUpperCase()"></div>
           <div class="fg"><label>Ano</label><input id="f-ano" placeholder="2020/2021"></div>
-          <div class="fg"><label>KM Atual</label><input id="f-km" placeholder="87.450"></div>
-          <div class="fg"><label>Data de Entrada na Oficina *</label><input type="date" id="f-entrada"></div>
+          <div class="fg"><label>KM Atual na Entrada</label><input id="f-km" placeholder="87.450"></div>
+          <div class="fg"><label>Data de Entrada *</label><input type="date" id="f-entrada"></div>
           <div class="fg"><label>Previsão de Entrega</label><input type="date" id="f-prev"></div>
         </div>
       </div>
 
       <!-- DIAGNÓSTICO -->
       <div class="fsec">
-        <div class="fsec-title">Diagnóstico</div>
+        <div class="fsec-title"><div class="fsec-title-left">Diagnóstico</div></div>
         <div class="fgrid g2">
           <div class="fg"><label>Queixa / Problema relatado</label><textarea id="f-qui" placeholder="O que o cliente relatou…"></textarea></div>
           <div class="fg"><label>Diagnóstico técnico</label><textarea id="f-dia" placeholder="Diagnóstico da vistoria…"></textarea></div>
@@ -419,13 +430,13 @@ input::placeholder,textarea::placeholder{color:var(--bg4)}
 
       <!-- SERVIÇOS -->
       <div class="fsec">
-        <div class="fsec-title">Serviços &amp; Peças — o que será feito</div>
+        <div class="fsec-title"><div class="fsec-title-left">Serviços &amp; Peças</div></div>
         <div class="svc-shell">
           <table>
             <thead><tr>
               <th style="width:36%">Descrição</th><th style="width:8%">Qtd</th>
-              <th style="width:16%">Valor Unit.</th><th style="width:18%">Tipo</th>
-              <th style="width:12%">Total</th><th style="width:10%"></th>
+              <th style="width:15%">Valor Unit.</th><th style="width:18%">Tipo</th>
+              <th style="width:13%">Total</th><th style="width:10%"></th>
             </tr></thead>
             <tbody id="svc-body"></tbody>
           </table>
@@ -433,7 +444,7 @@ input::placeholder,textarea::placeholder{color:var(--bg4)}
             <input id="ns-desc" placeholder="Descrição…" style="flex:3">
             <input id="ns-qty" type="number" value="1" min="1" style="flex:.6">
             <input id="ns-val" placeholder="Valor R$" style="flex:1.2">
-            <select id="ns-tp" style="flex:1.6">
+            <select id="ns-tp" style="flex:1.6" onchange="toggleOutField()">
               <option value="sta">Serviço Técnico Automotivo</option>
               <option value="pca">Peça</option>
               <option value="ret">Retífica</option>
@@ -456,17 +467,60 @@ input::placeholder,textarea::placeholder{color:var(--bg4)}
 
       <!-- CHECKLIST -->
       <div class="fsec">
-        <div class="fsec-title">Checklist — o que já foi feito</div>
+        <div class="fsec-title"><div class="fsec-title-left">Checklist — o que já foi feito</div></div>
         <div id="chk-list" class="checklist"></div>
         <div style="display:flex;gap:8px;margin-top:10px">
-          <input id="nci" placeholder="Adicionar etapa ao checklist…" style="flex:1">
+          <input id="nci" placeholder="Adicionar etapa…" style="flex:1">
           <button class="btn btn-ghost btn-sm" onclick="addChk()">+ Etapa</button>
+        </div>
+      </div>
+
+      <!-- PAGAMENTOS -->
+      <div class="fsec">
+        <div class="fsec-title">
+          <div class="fsec-title-left">Pagamentos Recebidos</div>
+          <span id="pag-status-badge"></span>
+        </div>
+        <div id="pag-list"></div>
+        <div style="display:flex;gap:6px;align-items:center;margin-top:10px;flex-wrap:wrap">
+          <input id="np-val" placeholder="Valor R$" style="flex:1;min-width:100px">
+          <select id="np-forma" style="flex:1.5;min-width:130px">
+            <option value="Dinheiro">Dinheiro</option>
+            <option value="Pix">Pix</option>
+            <option value="Cartão Débito">Cartão Débito</option>
+            <option value="Cartão Crédito">Cartão Crédito</option>
+            <option value="Transferência">Transferência</option>
+          </select>
+          <input id="np-data" type="date" style="flex:1;min-width:130px">
+          <button class="btn btn-green btn-sm" onclick="addPag()">+ Registrar</button>
+        </div>
+        <div id="pag-resumo" style="margin-top:10px"></div>
+      </div>
+
+      <!-- CAIXA PRÓPRIO -->
+      <div class="fsec">
+        <div class="fsec-title"><div class="fsec-title-left">Saídas do Caixa — Victor pagou do bolso</div></div>
+        <div id="caixa-list"></div>
+        <div style="display:flex;gap:6px;align-items:center;margin-top:10px;flex-wrap:wrap">
+          <input id="nc-desc" placeholder="Descrição (ex: compra da corrente…)" style="flex:3;min-width:180px">
+          <input id="nc-val" placeholder="Valor R$" style="flex:1;min-width:100px">
+          <input id="nc-data" type="date" style="flex:1;min-width:130px">
+          <button class="btn btn-danger" style="padding:8px 14px;font-size:11px" onclick="addCaixa()">+ Registrar</button>
+        </div>
+      </div>
+
+      <!-- NOTA FISCAL -->
+      <div class="fsec">
+        <div class="fsec-title"><div class="fsec-title-left">Nota Fiscal</div></div>
+        <div class="fgrid g2">
+          <div class="fg"><label>Número da NF</label><input id="f-nf-num" placeholder="Ex: 000125"></div>
+          <div class="fg"><label>Data de Emissão</label><input type="date" id="f-nf-data"></div>
         </div>
       </div>
 
       <!-- FINALIZAÇÃO -->
       <div class="fsec">
-        <div class="fsec-title">Finalização</div>
+        <div class="fsec-title"><div class="fsec-title-left">Finalização</div></div>
         <div class="fgrid g2">
           <div class="fg"><label>Status</label>
             <select id="f-sts">
@@ -489,20 +543,41 @@ input::placeholder,textarea::placeholder{color:var(--bg4)}
   </div>
 </div>
 
-<!-- MODAL: CLIENTE -->
+<!-- ══ MODAL: CLIENTE ══ -->
 <div class="overlay" id="m-cl">
-  <div class="modal" style="max-width:560px">
+  <div class="modal" style="max-width:680px">
     <div class="modal-top">
-      <div><div class="modal-title">NOVO CLIENTE</div><div class="modal-sub">CADASTRO</div></div>
+      <div><div class="modal-title" id="m-cl-title">NOVO CLIENTE</div><div class="modal-sub">CADASTRO</div></div>
       <button class="close-btn" onclick="closeCL()">✕</button>
     </div>
     <div class="modal-body">
-      <div class="fgrid g2">
-        <div class="fg sp2"><label>Nome *</label><input id="c-nm" placeholder="Nome completo"></div>
-        <div class="fg"><label>Telefone</label><input id="c-tl" placeholder="(11) 99999-9999"></div>
-        <div class="fg"><label>CPF / CNPJ</label><input id="c-dc" placeholder="000.000.000-00"></div>
-        <div class="fg sp2"><label>Endereço</label><input id="c-en" placeholder="Rua, número, bairro…"></div>
-        <div class="fg sp2"><label>Observações</label><textarea id="c-ob" placeholder="Preferências, histórico…"></textarea></div>
+      <!-- Dados -->
+      <div class="fsec">
+        <div class="fsec-title"><div class="fsec-title-left">Dados Pessoais</div></div>
+        <div class="fgrid g2">
+          <div class="fg sp2"><label>Nome *</label><input id="c-nm" placeholder="Nome completo"></div>
+          <div class="fg"><label>Telefone</label><input id="c-tl" placeholder="(11) 99999-9999"></div>
+          <div class="fg"><label>CPF / CNPJ</label><input id="c-dc" placeholder="000.000.000-00"></div>
+          <div class="fg sp2"><label>Endereço</label><input id="c-en" placeholder="Rua, número, bairro…"></div>
+          <div class="fg sp2"><label>Observações</label><textarea id="c-ob" placeholder="Preferências, histórico…"></textarea></div>
+        </div>
+      </div>
+      <!-- Veículos -->
+      <div class="fsec" style="margin-bottom:0">
+        <div class="fsec-title"><div class="fsec-title-left">Veículos Vinculados</div></div>
+        <div id="cl-vehs-list"></div>
+        <div style="background:var(--bg3);border:1px solid var(--line);padding:12px;margin-top:8px">
+          <div style="font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--accent2);margin-bottom:10px">+ ADICIONAR VEÍCULO</div>
+          <div class="fgrid g4">
+            <div class="fg sp2"><label>Modelo</label><input id="cv-mod" placeholder="Ex: VW Gol 1.0"></div>
+            <div class="fg"><label>Placa</label><input id="cv-plc" placeholder="ABC-1234" oninput="this.value=this.value.toUpperCase()"></div>
+            <div class="fg"><label>Ano</label><input id="cv-ano" placeholder="2020/2021"></div>
+            <div class="fg sp2"><label>KM de Referência</label><input id="cv-km" placeholder="87.450"></div>
+          </div>
+          <div style="margin-top:10px;display:flex;justify-content:flex-end">
+            <button class="btn btn-metal btn-sm" onclick="addVeh()">+ Adicionar Veículo</button>
+          </div>
+        </div>
       </div>
     </div>
     <div class="modal-foot">
@@ -512,7 +587,7 @@ input::placeholder,textarea::placeholder{color:var(--bg4)}
   </div>
 </div>
 
-<!-- MODAL: VER OS -->
+<!-- ══ MODAL: VER OS ══ -->
 <div class="overlay" id="m-view">
   <div class="modal">
     <div class="modal-top">
@@ -532,19 +607,20 @@ input::placeholder,textarea::placeholder{color:var(--bg4)}
 // ── STATE ──────────────────────────────────────────────
 let OS  = JSON.parse(localStorage.getItem('mg3_os') || '[]');
 let CL  = JSON.parse(localStorage.getItem('mg3_cl') || '[]');
-let svcs=[], chklist=[], eid=null, fil='all', viewId=null;
+let svcs=[],chklist=[],pagamentos=[],caixaProprio=[],tempVehs=[];
+let eid=null,fil='all',viewId=null,editCLId=null;
 
 // ── PERSIST ────────────────────────────────────────────
-function persist(){ localStorage.setItem('mg3_os',JSON.stringify(OS)); localStorage.setItem('mg3_cl',JSON.stringify(CL)); }
+function persist(){localStorage.setItem('mg3_os',JSON.stringify(OS));localStorage.setItem('mg3_cl',JSON.stringify(CL));}
 
 // ── UTILS ──────────────────────────────────────────────
-const uid=()=>Date.now().toString(36).toUpperCase();
+const uid=()=>Date.now().toString(36).toUpperCase()+Math.random().toString(36).slice(2,5).toUpperCase();
 const nextNum=()=>String(OS.reduce((m,o)=>Math.max(m,parseInt(o.num||0)),0)+1).padStart(4,'0');
 const fmt=v=>(parseFloat(String(v).replace(',','.'))||0).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
 const parsN=v=>parseFloat(String(v).replace(',','.'))||0;
 const todayISO=()=>new Date().toISOString().slice(0,10);
 const todayBR=()=>new Date().toLocaleDateString('pt-BR');
-const isoToBR=s=>s?new Date(s+'T00:00').toLocaleDateString('pt-BR'):'—';
+const isoToBR=s=>{if(!s)return'—';const p=s.includes('/')? s.split('/').reverse().join('-'):s; return new Date(p+'T00:00').toLocaleDateString('pt-BR');};
 
 const TP_LABEL={'sta':'Serv. Técnico Automotivo','pca':'Peça','ret':'Retífica','out':'Outros'};
 const TP_CLASS={'sta':'tp-sta','pca':'tp-pca','ret':'tp-ret','out':'tp-out'};
@@ -555,9 +631,24 @@ function badge(s){
   return `<span class="badge ${c}"><span class="dot"></span>${i} ${l}</span>`;
 }
 
+function pagBadge(o){
+  const total=parseFloat(o.total)||0;
+  const pago=(o.pagamentos||[]).reduce((s,p)=>s+(parsN(p.val)),0);
+  if(pago<=0) return `<span class="badge badge-aberto">● Em Aberto</span>`;
+  if(pago>=total) return `<span class="badge badge-pago">✓ Quitado</span>`;
+  return `<span class="badge badge-parcial">◑ Parcial</span>`;
+}
+
+function pagStatus(o){
+  const total=parseFloat(o.total)||0;
+  const pago=(o.pagamentos||[]).reduce((s,p)=>s+(parsN(p.val)),0);
+  if(pago<=0) return 'aberto';
+  if(pago>=total) return 'quitado';
+  return 'parcial';
+}
+
 document.getElementById('hdate').textContent=new Date().toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
 
-// Preenche select de anos no financeiro
 (function(){
   const sel=document.getElementById('fin-ano');
   const yr=new Date().getFullYear();
@@ -586,7 +677,7 @@ function updateStats(){
   document.getElementById('sv-rev').textContent='R$'+fmt(r);
 }
 
-// ── FILTER / TABLE ─────────────────────────────────────
+// ── TABLE OS ──────────────────────────────────────────
 function setFilter(f,el){fil=f;document.querySelectorAll('.pill').forEach(p=>p.classList.remove('active'));el.classList.add('active');renderOS();}
 
 function renderOS(){
@@ -603,10 +694,11 @@ function renderOS(){
       <td><span class="os-num">#${o.num}</span></td>
       <td><span class="entrada-tag">${isoToBR(o.entrada)}</span></td>
       <td><strong style="color:var(--white)">${o.cliente||'—'}</strong><br><small style="color:var(--steel)">${o.telefone||''}</small></td>
-      <td style="color:var(--chrome)">${o.modelo||'—'}</td>
+      <td style="color:var(--chrome);font-size:12px">${o.modelo||'—'}</td>
       <td><span class="plate">${o.placa||'—'}</span></td>
-      <td><small style="color:var(--steel)">${(o.svcs||[]).map(s=>s.desc).slice(0,2).join(', ')}${(o.svcs||[]).length>2?'…':''}</small></td>
       <td>${badge(o.status)}</td>
+      <td>${pagBadge(o)}</td>
+      <td>${o.nfNum?`<span class="badge badge-nf">✓ NF ${o.nfNum}</span>`:`<span class="badge badge-nf-p">⚠ Pendente</span>`}</td>
       <td style="font-family:'Orbitron',monospace;font-size:13px;color:var(--chrome)">R$ ${fmt(o.total)}</td>
       <td><div class="acts">
         <button class="btn btn-ghost btn-sm" onclick="viewOS('${o.id}')">◉</button>
@@ -624,19 +716,14 @@ function clSearch(val){
   const drop=document.getElementById('cl-drop');
   const q=val.trim().toLowerCase();
   const matches=q?CL.filter(c=>c.nome.toLowerCase().includes(q)):CL;
-
   let html=matches.slice(0,8).map(c=>`
     <div class="cl-opt" onclick="selectClient('${c.id}')">
       <span class="cl-opt-name">${c.nome}</span>
-      <span class="cl-opt-meta">${c.telefone||'Sem telefone'}</span>
+      <span class="cl-opt-meta">${c.telefone||'Sem telefone'} ${(c.veiculos||[]).length?' · '+c.veiculos.length+' veículo(s)':''}</span>
     </div>`).join('');
-
-  if(q && !CL.find(c=>c.nome.toLowerCase()===q)){
-    html+=`<div class="cl-opt" onclick="useNewClient('${val.replace(/'/g,'\\\'')}')" >
-      <span class="cl-opt-new">＋ Cadastrar "${val}" como novo cliente</span>
-    </div>`;
+  if(q&&!CL.find(c=>c.nome.toLowerCase()===q)){
+    html+=`<div class="cl-opt" onclick="useNewClient('${val.replace(/'/g,"\\'")}')"><span class="cl-opt-new">＋ Cadastrar "${val}" como novo cliente</span></div>`;
   }
-
   drop.innerHTML=html||'<div class="cl-opt"><span class="cl-opt-meta">Nenhum cliente encontrado</span></div>';
   drop.classList.add('open');
 }
@@ -647,45 +734,81 @@ function selectClient(id){
   document.getElementById('f-cli').value=c.nome;
   document.getElementById('f-tel').value=c.telefone||'';
   document.getElementById('cl-drop').classList.remove('open');
+  // Mostrar veículos
+  const vehs=c.veiculos||[];
+  const wrap=document.getElementById('veh-select-wrap');
+  const opts=document.getElementById('veh-opts');
+  if(vehs.length){
+    opts.innerHTML=vehs.map((v,i)=>`
+      <div class="veh-opt" onclick="selectVeh(${i},'${c.id}')" id="veh-opt-${i}">
+        <span class="veh-opt-plate">${v.placa}</span>
+        <span class="veh-opt-model">${v.modelo}</span>
+        <span class="veh-opt-year">${v.ano||''} ${v.km?'| KM '+v.km:''}</span>
+      </div>`).join('');
+    wrap.classList.add('open');
+  } else {
+    wrap.classList.remove('open');
+  }
+}
+
+function selectVeh(idx,cid){
+  const c=CL.find(x=>x.id===cid);
+  if(!c)return;
+  const v=c.veiculos[idx];
+  document.getElementById('f-mod').value=v.modelo||'';
+  document.getElementById('f-plc').value=v.placa||'';
+  document.getElementById('f-ano').value=v.ano||'';
+  document.getElementById('f-km').value=''; // KM fica em branco para digitar o atual
+  document.querySelectorAll('.veh-opt').forEach(el=>el.classList.remove('selected'));
+  document.getElementById('veh-opt-'+idx).classList.add('selected');
 }
 
 function useNewClient(nm){
   document.getElementById('f-cli').value=nm;
+  document.getElementById('f-tel').value='';
   document.getElementById('cl-drop').classList.remove('open');
+  document.getElementById('veh-select-wrap').classList.remove('open');
 }
 
 document.addEventListener('click',e=>{
   if(!e.target.closest('.cl-search-wrap')) document.getElementById('cl-drop').classList.remove('open');
 });
 
-// ── TIPO SELECT OUTROS ─────────────────────────────────
-document.getElementById('ns-tp').addEventListener('change',function(){
-  document.getElementById('ns-out').style.display=this.value==='out'?'block':'none';
-});
+function toggleOutField(){
+  document.getElementById('ns-out').style.display=document.getElementById('ns-tp').value==='out'?'block':'none';
+}
 
 // ── MODAL OS ──────────────────────────────────────────
 function openOS(){
-  eid=null;svcs=[];chklist=[];
+  eid=null;svcs=[];chklist=[];pagamentos=[];caixaProprio=[];
   document.getElementById('m-os-title').textContent='NOVA ORDEM DE SERVIÇO';
   document.getElementById('m-os-sub').textContent='OS #'+nextNum()+' — MONSTER GARAGE';
   document.getElementById('btn-print').style.display='none';
-  clearForm();renderSvcs();renderChk();
+  clearOSForm();renderSvcs();renderChk();renderPag();renderCaixa();
   document.getElementById('m-os').classList.add('open');
 }
 function closeOS(){document.getElementById('m-os').classList.remove('open');}
 
-function clearForm(){
-  ['f-cli','f-tel','f-mod','f-plc','f-ano','f-km','f-qui','f-dia','f-obs'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});
+function clearOSForm(){
+  ['f-cli','f-tel','f-mod','f-plc','f-ano','f-km','f-qui','f-dia','f-obs','f-nf-num'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});
   document.getElementById('f-sts').value='aguardando';
   document.getElementById('f-prev').value='';
   document.getElementById('f-entrada').value=todayISO();
+  document.getElementById('f-nf-data').value='';
   document.getElementById('ns-out').style.display='none';
   document.getElementById('ns-tp').value='sta';
+  document.getElementById('veh-select-wrap').classList.remove('open');
+  document.getElementById('np-data').value=todayISO();
+  document.getElementById('nc-data').value=todayISO();
 }
 
 function editOS(id){
   const o=OS.find(x=>x.id===id);if(!o)return;
-  eid=id;svcs=JSON.parse(JSON.stringify(o.svcs||[]));chklist=JSON.parse(JSON.stringify(o.chklist||[]));
+  eid=id;
+  svcs=JSON.parse(JSON.stringify(o.svcs||[]));
+  chklist=JSON.parse(JSON.stringify(o.chklist||[]));
+  pagamentos=JSON.parse(JSON.stringify(o.pagamentos||[]));
+  caixaProprio=JSON.parse(JSON.stringify(o.caixaProprio||[]));
   document.getElementById('m-os-title').textContent='EDITAR OS #'+o.num;
   document.getElementById('m-os-sub').textContent='MONSTER GARAGE';
   document.getElementById('btn-print').style.display='inline-flex';
@@ -701,9 +824,14 @@ function editOS(id){
   document.getElementById('f-obs').value=o.obs||'';
   document.getElementById('f-prev').value=o.prev||'';
   document.getElementById('f-entrada').value=o.entrada||todayISO();
+  document.getElementById('f-nf-num').value=o.nfNum||'';
+  document.getElementById('f-nf-data').value=o.nfData||'';
   document.getElementById('ns-out').style.display='none';
   document.getElementById('ns-tp').value='sta';
-  renderSvcs();renderChk();
+  document.getElementById('veh-select-wrap').classList.remove('open');
+  document.getElementById('np-data').value=todayISO();
+  document.getElementById('nc-data').value=todayISO();
+  renderSvcs();renderChk();renderPag();renderCaixa();
   document.getElementById('m-os').classList.add('open');
 }
 
@@ -724,9 +852,13 @@ function saveOS(){
     diag:document.getElementById('f-dia').value.trim(),
     svcs:JSON.parse(JSON.stringify(svcs)),
     chklist:JSON.parse(JSON.stringify(chklist)),
+    pagamentos:JSON.parse(JSON.stringify(pagamentos)),
+    caixaProprio:JSON.parse(JSON.stringify(caixaProprio)),
     status:document.getElementById('f-sts').value,
     prev:document.getElementById('f-prev').value,
     entrada:document.getElementById('f-entrada').value||todayISO(),
+    nfNum:document.getElementById('f-nf-num').value.trim(),
+    nfData:document.getElementById('f-nf-data').value,
     obs:document.getElementById('f-obs').value.trim(),
     total,
     date:eid?OS.find(o=>o.id===eid)?.date:todayBR(),
@@ -735,7 +867,7 @@ function saveOS(){
   else{
     OS.push(obj);
     if(!CL.find(c=>c.nome.toLowerCase()===cli.toLowerCase()))
-      CL.push({id:uid(),nome:cli,telefone:obj.telefone,doc:'',end:'',obs:''});
+      CL.push({id:uid(),nome:cli,telefone:obj.telefone,doc:'',end:'',obs:'',veiculos:[]});
   }
   persist();closeOS();renderOS();
 }
@@ -747,10 +879,7 @@ function addSvc(){
   const val=parsN(document.getElementById('ns-val').value);
   let tp=document.getElementById('ns-tp').value;
   let tpLabel=TP_LABEL[tp];
-  if(tp==='out'){
-    const custom=document.getElementById('ns-out').value.trim();
-    if(custom) tpLabel=custom;
-  }
+  if(tp==='out'){const c=document.getElementById('ns-out').value.trim();if(c)tpLabel=c;}
   if(!desc)return;
   svcs.push({desc,qty,val,tp,tpLabel,total:qty*val});
   document.getElementById('ns-desc').value='';
@@ -763,8 +892,7 @@ function addSvc(){
 function remSvc(i){svcs.splice(i,1);renderSvcs();}
 
 function renderSvcs(){
-  const tb=document.getElementById('svc-body');
-  tb.innerHTML=svcs.map((s,i)=>`
+  document.getElementById('svc-body').innerHTML=svcs.map((s,i)=>`
     <tr>
       <td>${s.desc}</td>
       <td style="color:var(--steel)">${s.qty}</td>
@@ -790,13 +918,88 @@ function addChk(){const t=document.getElementById('nci').value.trim();if(!t)retu
 function togChk(i){chklist[i].done=!chklist[i].done;renderChk();}
 function renderChk(){
   const c=document.getElementById('chk-list');
-  if(!chklist.length){c.innerHTML='<div style="color:var(--steel);font-family:\'Share Tech Mono\',monospace;font-size:10px;padding:6px 0;letter-spacing:1px">NENHUM ITEM — adicione etapas abaixo</div>';return;}
+  if(!chklist.length){c.innerHTML='<div style="color:var(--steel);font-family:\'Share Tech Mono\',monospace;font-size:10px;padding:6px 0">NENHUM ITEM</div>';return;}
   c.innerHTML=chklist.map((x,i)=>`
     <div class="chk ${x.done?'done':''}" onclick="togChk(${i})">
       <div class="chk-box">${x.done?'✓':''}</div>
       <span class="chk-lbl">${x.lbl}</span>
       <button style="background:none;border:none;color:var(--steel);cursor:pointer;font-size:11px" onclick="event.stopPropagation();chklist.splice(${i},1);renderChk()">✕</button>
     </div>`).join('');
+}
+
+// ── PAGAMENTOS ────────────────────────────────────────
+function addPag(){
+  const val=parsN(document.getElementById('np-val').value);
+  const forma=document.getElementById('np-forma').value;
+  const data=document.getElementById('np-data').value;
+  if(!val||val<=0){alert('Informe um valor válido!');return;}
+  pagamentos.push({id:uid(),val,forma,data});
+  document.getElementById('np-val').value='';
+  renderPag();
+}
+
+function remPag(i){pagamentos.splice(i,1);renderPag();}
+
+function renderPag(){
+  const list=document.getElementById('pag-list');
+  const total=svcs.reduce((s,x)=>s+(parseFloat(x.total)||0),0);
+  const pago=pagamentos.reduce((s,p)=>s+p.val,0);
+  const saldo=total-pago;
+
+  list.innerHTML=pagamentos.length?pagamentos.map((p,i)=>`
+    <div class="pag-row">
+      <span class="pag-forma">${p.forma}</span>
+      <span class="pag-val">R$ ${fmt(p.val)}</span>
+      <span class="pag-data">${isoToBR(p.data)}</span>
+      <button class="btn btn-danger" style="padding:2px 8px;margin-left:auto" onclick="remPag(${i})">✕</button>
+    </div>`).join('')
+    :'<div style="color:var(--steel);font-family:\'Share Tech Mono\',monospace;font-size:10px;padding:6px 0">NENHUM PAGAMENTO REGISTRADO</div>';
+
+  // Badge de status
+  let badge='';
+  if(pago<=0) badge=`<span class="badge badge-aberto" style="font-size:10px">Em Aberto</span>`;
+  else if(pago>=total&&total>0) badge=`<span class="badge badge-pago" style="font-size:10px">✓ Quitado</span>`;
+  else badge=`<span class="badge badge-parcial" style="font-size:10px">◑ Parcial</span>`;
+  document.getElementById('pag-status-badge').innerHTML=badge;
+
+  // Resumo
+  const resumo=document.getElementById('pag-resumo');
+  if(total>0){
+    resumo.innerHTML=`
+      <div style="display:flex;gap:16px;padding:10px 14px;background:var(--bg3);border:1px solid var(--line);font-family:'Share Tech Mono',monospace;font-size:10px;flex-wrap:wrap;gap:14px">
+        <span>TOTAL OS: <strong style="color:var(--chrome)">R$ ${fmt(total)}</strong></span>
+        <span>RECEBIDO: <strong style="color:var(--green)">R$ ${fmt(pago)}</strong></span>
+        <span>SALDO: <strong style="color:${saldo>0?'#c44040':'var(--green)'}">R$ ${fmt(Math.abs(saldo))}${saldo<0?' (troco)':''}</strong></span>
+      </div>`;
+  } else {
+    resumo.innerHTML='';
+  }
+}
+
+// ── CAIXA PROPRIO ─────────────────────────────────────
+function addCaixa(){
+  const desc=document.getElementById('nc-desc').value.trim();
+  const val=parsN(document.getElementById('nc-val').value);
+  const data=document.getElementById('nc-data').value;
+  if(!desc||!val){alert('Preencha descrição e valor!');return;}
+  caixaProprio.push({id:uid(),desc,val,data});
+  document.getElementById('nc-desc').value='';
+  document.getElementById('nc-val').value='';
+  renderCaixa();
+}
+
+function remCaixa(i){caixaProprio.splice(i,1);renderCaixa();}
+
+function renderCaixa(){
+  const list=document.getElementById('caixa-list');
+  list.innerHTML=caixaProprio.length?caixaProprio.map((c,i)=>`
+    <div class="caixa-row">
+      <span class="caixa-desc">${c.desc}</span>
+      <span class="caixa-val">- R$ ${fmt(c.val)}</span>
+      <span style="font-size:11px;color:var(--steel);margin:0 8px">${isoToBR(c.data)}</span>
+      <button class="btn btn-danger" style="padding:2px 8px;margin-left:auto" onclick="remCaixa(${i})">✕</button>
+    </div>`).join('')
+    :'<div style="color:var(--steel);font-family:\'Share Tech Mono\',monospace;font-size:10px;padding:6px 0">NENHUMA SAÍDA REGISTRADA</div>';
 }
 
 // ── VIEW OS ───────────────────────────────────────────
@@ -806,30 +1009,31 @@ function viewOS(id){
   document.getElementById('vw-title').textContent='OS #'+o.num;
   document.getElementById('vw-sub').textContent=o.cliente+' — '+o.modelo+' / '+o.placa;
   document.getElementById('vw-edit').onclick=()=>{closeView();editOS(id);};
-  const tpTotals={sta:0,pca:0,ret:0,out:0};
-  (o.svcs||[]).forEach(s=>{tpTotals[s.tp]=(tpTotals[s.tp]||0)+s.total;});
-  const dk=(o.chklist||[]).filter(c=>c.done).length;
-  const tk=(o.chklist||[]).length;
+  const tpT={sta:0,pca:0,ret:0,out:0};
+  (o.svcs||[]).forEach(s=>{tpT[s.tp]=(tpT[s.tp]||0)+s.total;});
+  const dk=(o.chklist||[]).filter(c=>c.done).length,tk=(o.chklist||[]).length;
+  const pago=(o.pagamentos||[]).reduce((s,p)=>s+parsN(p.val),0);
+  const saldo=(parseFloat(o.total)||0)-pago;
+  const totalCaixa=(o.caixaProprio||[]).reduce((s,c)=>s+parsN(c.val),0);
 
   document.getElementById('vw-body').innerHTML=`
     <div style="display:flex;justify-content:space-between;align-items:center;background:var(--bg3);border:1px solid var(--line);padding:14px 18px;margin-bottom:16px;flex-wrap:wrap;gap:10px">
-      <div>${badge(o.status)}</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">${badge(o.status)} ${pagBadge(o)} ${o.nfNum?`<span class="badge badge-nf">✓ NF ${o.nfNum}</span>`:`<span class="badge badge-nf-p">⚠ NF Pendente</span>`}</div>
       <div style="display:flex;gap:20px;flex-wrap:wrap">
         <div style="text-align:center"><div style="font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--steel);margin-bottom:3px">ENTRADA</div><div style="font-family:'Share Tech Mono',monospace;font-size:12px;color:var(--accent)">${isoToBR(o.entrada)}</div></div>
         ${o.prev?`<div style="text-align:center"><div style="font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--steel);margin-bottom:3px">ENTREGA PREV.</div><div style="font-family:'Share Tech Mono',monospace;font-size:12px;color:var(--chrome)">${isoToBR(o.prev)}</div></div>`:''}
-        <div style="text-align:center"><div style="font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--steel);margin-bottom:3px">ABERTURA OS</div><div style="font-family:'Share Tech Mono',monospace;font-size:12px;color:var(--steel)">${o.date}</div></div>
       </div>
     </div>
 
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">
       <div style="background:var(--bg3);border:1px solid var(--line);padding:14px 16px">
-        <div style="font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--steel);margin-bottom:8px">Cliente</div>
-        <div style="font-size:16px;font-weight:500;color:var(--white)">${o.cliente}</div>
+        <div style="font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--steel);margin-bottom:8px">Cliente</div>
+        <div style="font-size:16px;font-weight:500">${o.cliente}</div>
         ${o.telefone?`<div style="font-size:12px;color:var(--steel);margin-top:4px">${o.telefone}</div>`:''}
       </div>
       <div style="background:var(--bg3);border:1px solid var(--line);padding:14px 16px">
-        <div style="font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--steel);margin-bottom:8px">Veículo</div>
-        <div style="font-size:16px;font-weight:500;color:var(--white)">${o.modelo}</div>
+        <div style="font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--steel);margin-bottom:8px">Veículo</div>
+        <div style="font-size:16px;font-weight:500">${o.modelo}</div>
         <div style="display:flex;gap:10px;align-items:center;margin-top:6px">
           <span class="plate">${o.placa}</span>
           ${o.ano?`<small style="color:var(--steel)">${o.ano}</small>`:''}
@@ -839,15 +1043,15 @@ function viewOS(id){
     </div>
 
     ${o.queixa||o.diag?`<div style="background:var(--bg3);border:1px solid var(--line);padding:14px 16px;margin-bottom:14px">
-      ${o.queixa?`<div style="margin-bottom:10px"><div style="font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--steel);margin-bottom:6px">Queixa do Cliente</div><div style="font-size:13px;line-height:1.7">${o.queixa}</div></div>`:''}
-      ${o.diag?`<div><div style="font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--accent2);margin-bottom:6px">Diagnóstico Técnico</div><div style="font-size:13px;line-height:1.7">${o.diag}</div></div>`:''}
+      ${o.queixa?`<div style="margin-bottom:10px"><div style="font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--steel);margin-bottom:6px">Queixa do Cliente</div><div style="font-size:13px;line-height:1.7">${o.queixa}</div></div>`:''}
+      ${o.diag?`<div><div style="font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--accent2);margin-bottom:6px">Diagnóstico Técnico</div><div style="font-size:13px;line-height:1.7">${o.diag}</div></div>`:''}
     </div>`:''}
 
     ${(o.svcs||[]).length?`<div style="border:1px solid var(--line);margin-bottom:14px;overflow:hidden">
       <div style="background:var(--bg3);padding:9px 14px;font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--accent2)">Serviços &amp; Peças</div>
       <table style="width:100%;border-collapse:collapse">
         <thead><tr style="background:var(--bg2)">
-          <th style="padding:7px 14px;text-align:left;font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--steel);border-bottom:1px solid var(--line)">Descrição</th>
+          <th style="padding:7px 14px;text-align:left;font-family:'Share Tech Mono',monospace;font-size:8px;color:var(--steel);border-bottom:1px solid var(--line)">Descrição</th>
           <th style="padding:7px 8px;font-family:'Share Tech Mono',monospace;font-size:8px;color:var(--steel);border-bottom:1px solid var(--line)">Qtd</th>
           <th style="padding:7px 8px;font-family:'Share Tech Mono',monospace;font-size:8px;color:var(--steel);border-bottom:1px solid var(--line)">Valor</th>
           <th style="padding:7px 8px;font-family:'Share Tech Mono',monospace;font-size:8px;color:var(--steel);border-bottom:1px solid var(--line)">Tipo</th>
@@ -863,18 +1067,40 @@ function viewOS(id){
       </table>
       <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 14px;background:var(--bg2);border-top:1px solid var(--line2);flex-wrap:wrap;gap:8px">
         <div style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--steel);line-height:1.8">
-          ${tpTotals.sta>0?`S.T.A.: <strong class="tp-sta">R$ ${fmt(tpTotals.sta)}</strong> &nbsp;`:''}
-          ${tpTotals.pca>0?`Peças: <strong class="tp-pca">R$ ${fmt(tpTotals.pca)}</strong> &nbsp;`:''}
-          ${tpTotals.ret>0?`Retífica: <strong class="tp-ret">R$ ${fmt(tpTotals.ret)}</strong> &nbsp;`:''}
-          ${tpTotals.out>0?`Outros: <strong class="tp-out">R$ ${fmt(tpTotals.out)}</strong>`:''}
+          ${tpT.sta>0?`S.T.A.: <strong class="tp-sta">R$ ${fmt(tpT.sta)}</strong> &nbsp;`:''}
+          ${tpT.pca>0?`Peças: <strong class="tp-pca">R$ ${fmt(tpT.pca)}</strong> &nbsp;`:''}
+          ${tpT.ret>0?`Retífica: <strong class="tp-ret">R$ ${fmt(tpT.ret)}</strong> &nbsp;`:''}
+          ${tpT.out>0?`Outros: <strong class="tp-out">R$ ${fmt(tpT.out)}</strong>`:''}
         </div>
         <div style="font-family:'Orbitron',monospace;font-weight:700;font-size:20px;background:linear-gradient(135deg,var(--white),var(--steel));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">TOTAL R$ ${fmt(o.total)}</div>
       </div>
     </div>`:''}
 
+    ${(o.pagamentos||[]).length?`<div style="border:1px solid var(--line);margin-bottom:14px;overflow:hidden">
+      <div style="background:var(--bg3);padding:9px 14px;font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--accent2)">Pagamentos Recebidos</div>
+      ${(o.pagamentos||[]).map(p=>`<div class="pag-row"><span class="pag-forma">${p.forma}</span><span class="pag-val">R$ ${fmt(p.val)}</span><span class="pag-data">${isoToBR(p.data)}</span></div>`).join('')}
+      <div style="display:flex;gap:16px;padding:10px 14px;background:var(--bg2);border-top:1px solid var(--line);font-family:'Share Tech Mono',monospace;font-size:10px;flex-wrap:wrap">
+        <span>TOTAL: <strong style="color:var(--chrome)">R$ ${fmt(o.total)}</strong></span>
+        <span>RECEBIDO: <strong style="color:var(--green)">R$ ${fmt(pago)}</strong></span>
+        <span>SALDO: <strong style="color:${saldo>0?'#c44040':'var(--green)'}">R$ ${fmt(Math.abs(saldo))}${saldo<0?' (troco)':''}</strong></span>
+      </div>
+    </div>`:
+    `<div style="background:rgba(196,64,64,.05);border:1px solid rgba(196,64,64,.2);padding:10px 14px;margin-bottom:14px;font-family:'Share Tech Mono',monospace;font-size:10px;color:#c44040">⚠ NENHUM PAGAMENTO REGISTRADO — TOTAL EM ABERTO: R$ ${fmt(o.total)}</div>`}
+
+    ${(o.caixaProprio||[]).length?`<div style="border:1px solid rgba(196,64,64,.2);margin-bottom:14px;overflow:hidden">
+      <div style="background:rgba(196,64,64,.06);padding:9px 14px;font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:#c44040">💰 Saídas do Caixa — Aguardando Reembolso</div>
+      ${(o.caixaProprio||[]).map(c=>`<div class="caixa-row"><span class="caixa-desc">${c.desc}</span><span class="caixa-val">- R$ ${fmt(c.val)}</span><span style="font-size:11px;color:var(--steel);margin-left:8px">${isoToBR(c.data)}</span></div>`).join('')}
+      <div style="padding:10px 14px;background:var(--bg2);border-top:1px solid rgba(196,64,64,.2);font-family:'Share Tech Mono',monospace;font-size:10px;color:#c44040">TOTAL A REEMBOLSAR: R$ ${fmt(totalCaixa)}</div>
+    </div>`:''}
+
+    ${o.nfNum?`<div style="background:var(--bg3);border:1px solid var(--line);padding:12px 16px;margin-bottom:14px;display:flex;gap:20px;font-family:'Share Tech Mono',monospace;font-size:10px">
+      <span>NF Nº: <strong style="color:var(--chrome)">${o.nfNum}</strong></span>
+      ${o.nfData?`<span>Emissão: <strong style="color:var(--chrome)">${isoToBR(o.nfData)}</strong></span>`:''}
+    </div>`:''}
+
     ${tk?`<div style="border:1px solid var(--line);margin-bottom:14px;overflow:hidden">
       <div style="background:var(--bg3);padding:9px 14px;font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--accent2);display:flex;justify-content:space-between">
-        <span>Checklist</span><span style="color:var(--green)">${dk}/${tk} concluídos</span>
+        <span>Checklist</span><span style="color:var(--green)">${dk}/${tk}</span>
       </div>
       ${(o.chklist||[]).map(c=>`<div style="padding:9px 14px;border-top:1px solid var(--line);display:flex;align-items:center;gap:10px;background:${c.done?'rgba(61,153,112,.04)':'transparent'}">
         <div style="width:14px;height:14px;border:1px solid ${c.done?'var(--green)':'var(--line2)'};background:${c.done?'var(--green)':'transparent'};display:flex;align-items:center;justify-content:center;font-size:9px;color:${c.done?'#000':'transparent'};flex-shrink:0">✓</div>
@@ -895,27 +1121,31 @@ function printView(){const o=OS.find(x=>x.id===viewId);if(o)printOS(o);}
 function doPrint(){if(eid){const o=OS.find(x=>x.id===eid);if(o)printOS(o);}}
 
 function printOS(o){
-  const tpTotals={sta:0,pca:0,ret:0,out:0};
-  (o.svcs||[]).forEach(s=>{tpTotals[s.tp]=(tpTotals[s.tp]||0)+s.total;});
+  const tpT={sta:0,pca:0,ret:0,out:0};
+  (o.svcs||[]).forEach(s=>{tpT[s.tp]=(tpT[s.tp]||0)+s.total;});
+  const pago=(o.pagamentos||[]).reduce((s,p)=>s+parsN(p.val),0);
+  const saldo=(parseFloat(o.total)||0)-pago;
+  const totalCaixa=(o.caixaProprio||[]).reduce((s,c)=>s+parsN(c.val),0);
   const w=window.open('','_blank');
   w.document.write(`<!DOCTYPE html><html><head><title>OS #${o.num}</title>
   <style>
     body{font-family:Arial,sans-serif;font-size:12px;color:#111;max-width:800px;margin:0 auto;padding:20px}
-    h2{margin:0;font-size:24px;font-weight:900;letter-spacing:3px}
+    h2{margin:0;font-size:22px;font-weight:900;letter-spacing:3px}
     .sub{font-size:10px;color:#666;letter-spacing:2px;text-transform:uppercase}
-    .hdr{display:flex;justify-content:space-between;border-bottom:3px solid #111;padding-bottom:12px;margin-bottom:18px}
-    .os-n{font-size:32px;font-weight:900;letter-spacing:2px}
-    table{width:100%;border-collapse:collapse;margin:10px 0}
-    th,td{border:1px solid #ccc;padding:7px 10px;text-align:left;font-size:11px}
+    .hdr{display:flex;justify-content:space-between;border-bottom:3px solid #111;padding-bottom:12px;margin-bottom:16px}
+    .os-n{font-size:30px;font-weight:900;letter-spacing:2px}
+    table{width:100%;border-collapse:collapse;margin:8px 0}
+    th,td{border:1px solid #ccc;padding:6px 9px;text-align:left;font-size:11px}
     th{background:#f0f0f0;font-weight:700;text-transform:uppercase;letter-spacing:1px}
     .tot-row td{font-weight:700;background:#f9f9f9}
-    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
-    .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px}
-    .box{border:1px solid #ccc;padding:10px 12px}
-    .lbl{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#888;margin-bottom:5px}
-    .plate{font-weight:700;letter-spacing:3px;border:2px solid #111;padding:2px 7px;display:inline-block}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+    .box{border:1px solid #ccc;padding:9px 12px}
+    .lbl{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#888;margin-bottom:4px}
+    .plate{font-weight:700;letter-spacing:3px;border:2px solid #111;padding:2px 6px;display:inline-block}
     .sig{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:40px}
     .sig-line{border-top:1px solid #111;padding-top:5px;text-align:center;font-size:10px;color:#666}
+    .pag-box{background:#f9fff9;border:1px solid #b0e0b0;padding:9px 12px;margin-bottom:8px}
+    .cx-box{background:#fff5f5;border:1px solid #e0b0b0;padding:9px 12px;margin-bottom:8px}
     @media print{body{padding:0}}
   </style></head><body>
   <div class="hdr">
@@ -924,20 +1154,25 @@ function printOS(o){
   </div>
   <div class="grid2">
     <div class="box"><div class="lbl">Cliente</div><strong>${o.cliente}</strong>${o.telefone?`<br>${o.telefone}`:''}</div>
-    <div class="box"><div class="lbl">Veículo</div><strong>${o.modelo}</strong>${o.ano?' ('+o.ano+')':''}<br><span class="plate">${o.placa}</span>${o.km?' &nbsp; KM: '+o.km:''}</div>
+    <div class="box"><div class="lbl">Veículo</div><strong>${o.modelo}</strong>${o.ano?' ('+o.ano+')':''}<br><span class="plate">${o.placa}</span>${o.km?' KM: '+o.km:''}</div>
   </div>
-  ${o.queixa||o.diag?`<div class="box" style="margin-bottom:14px">${o.queixa?`<div class="lbl">Queixa do Cliente</div><p>${o.queixa}</p>`:''}${o.diag?`<div class="lbl" style="margin-top:8px">Diagnóstico Técnico</div><p>${o.diag}</p>`:''}</div>`:''}
+  ${o.queixa||o.diag?`<div class="box" style="margin-bottom:12px">${o.queixa?`<div class="lbl">Queixa</div><p>${o.queixa}</p>`:''}${o.diag?`<div class="lbl" style="margin-top:6px">Diagnóstico</div><p>${o.diag}</p>`:''}</div>`:''}
   ${(o.svcs||[]).length?`<div class="lbl">Serviços &amp; Peças</div>
   <table><thead><tr><th>Descrição</th><th>Qtd</th><th>Valor Unit.</th><th>Tipo</th><th>Total</th></tr></thead>
   <tbody>${(o.svcs||[]).map(s=>`<tr><td>${s.desc}</td><td>${s.qty}</td><td>R$ ${fmt(s.val)}</td><td>${s.tpLabel||TP_LABEL[s.tp]||s.tp}</td><td>R$ ${fmt(s.total)}</td></tr>`).join('')}
-  ${tpTotals.sta>0?`<tr class="tot-row"><td colspan="3"></td><td>Serv. Técnico Automotivo</td><td>R$ ${fmt(tpTotals.sta)}</td></tr>`:''}
-  ${tpTotals.pca>0?`<tr class="tot-row"><td colspan="3"></td><td>Peças</td><td>R$ ${fmt(tpTotals.pca)}</td></tr>`:''}
-  ${tpTotals.ret>0?`<tr class="tot-row"><td colspan="3"></td><td>Retífica</td><td>R$ ${fmt(tpTotals.ret)}</td></tr>`:''}
-  ${tpTotals.out>0?`<tr class="tot-row"><td colspan="3"></td><td>Outros</td><td>R$ ${fmt(tpTotals.out)}</td></tr>`:''}
+  ${tpT.sta>0?`<tr class="tot-row"><td colspan="3"></td><td>Serv. Técnico Automotivo</td><td>R$ ${fmt(tpT.sta)}</td></tr>`:''}
+  ${tpT.pca>0?`<tr class="tot-row"><td colspan="3"></td><td>Peças</td><td>R$ ${fmt(tpT.pca)}</td></tr>`:''}
+  ${tpT.ret>0?`<tr class="tot-row"><td colspan="3"></td><td>Retífica</td><td>R$ ${fmt(tpT.ret)}</td></tr>`:''}
+  ${tpT.out>0?`<tr class="tot-row"><td colspan="3"></td><td>Outros</td><td>R$ ${fmt(tpT.out)}</td></tr>`:''}
   <tr class="tot-row"><td colspan="3"></td><td><strong>TOTAL GERAL</strong></td><td><strong>R$ ${fmt(o.total)}</strong></td></tr>
   </tbody></table>`:''}
-  ${(o.chklist||[]).length?`<div class="lbl" style="margin-top:12px">Checklist de Serviços</div><div>${(o.chklist||[]).map(c=>`<div style="padding:4px 0;${c.done?'color:#999;text-decoration:line-through':''}">☐ ${c.lbl}</div>`).join('')}</div>`:''}
-  ${o.obs?`<div class="box" style="margin-top:14px"><div class="lbl">Observações</div><p>${o.obs}</p></div>`:''}
+  ${(o.pagamentos||[]).length?`<div class="lbl" style="margin-top:12px">Pagamentos</div>
+  <div class="pag-box">${(o.pagamentos||[]).map(p=>`<div>${p.forma}: R$ ${fmt(p.val)} — ${isoToBR(p.data)}</div>`).join('')}
+  <div style="margin-top:6px;font-weight:700">Recebido: R$ ${fmt(pago)} | Saldo: R$ ${fmt(Math.abs(saldo))}${saldo>0?' (em aberto)':saldo<0?' (troco)':' (quitado)'}</div></div>`:''}
+  ${(o.caixaProprio||[]).length?`<div class="lbl" style="margin-top:12px">Saídas do Caixa</div>
+  <div class="cx-box">${(o.caixaProprio||[]).map(c=>`<div>${c.desc}: R$ ${fmt(c.val)} — ${isoToBR(c.data)}</div>`).join('')}
+  <div style="margin-top:6px;font-weight:700">Total a reembolsar: R$ ${fmt(totalCaixa)}</div></div>`:''}
+  ${o.nfNum?`<div class="box" style="margin-top:10px"><div class="lbl">Nota Fiscal</div>NF Nº ${o.nfNum}${o.nfData?' — Emitida em '+isoToBR(o.nfData):''}</div>`:''}
   <div class="sig">
     <div class="sig-line">Assinatura do Responsável</div>
     <div class="sig-line">Assinatura do Cliente / Autorização</div>
@@ -948,15 +1183,71 @@ function printOS(o){
 }
 
 // ── CLIENTS ───────────────────────────────────────────
-function openCL(){['c-nm','c-tl','c-dc','c-en','c-ob'].forEach(id=>document.getElementById(id).value='');document.getElementById('m-cl').classList.add('open');}
+let editCLId=null;
+let tempVehs=[];
+
+function openCL(id){
+  editCLId=id||null;
+  tempVehs=[];
+  document.getElementById('m-cl-title').textContent=id?'EDITAR CLIENTE':'NOVO CLIENTE';
+  ['c-nm','c-tl','c-dc','c-en','c-ob','cv-mod','cv-plc','cv-ano','cv-km'].forEach(x=>document.getElementById(x).value='');
+  if(id){
+    const c=CL.find(x=>x.id===id);
+    if(c){
+      document.getElementById('c-nm').value=c.nome||'';
+      document.getElementById('c-tl').value=c.telefone||'';
+      document.getElementById('c-dc').value=c.doc||'';
+      document.getElementById('c-en').value=c.end||'';
+      document.getElementById('c-ob').value=c.obs||'';
+      tempVehs=JSON.parse(JSON.stringify(c.veiculos||[]));
+    }
+  }
+  renderTempVehs();
+  document.getElementById('m-cl').classList.add('open');
+}
 function closeCL(){document.getElementById('m-cl').classList.remove('open');}
+
+function addVeh(){
+  const mod=document.getElementById('cv-mod').value.trim();
+  const plc=document.getElementById('cv-plc').value.trim();
+  if(!mod||!plc){alert('Informe modelo e placa!');return;}
+  tempVehs.push({id:uid(),modelo:mod,placa:plc,ano:document.getElementById('cv-ano').value.trim(),km:document.getElementById('cv-km').value.trim()});
+  ['cv-mod','cv-plc','cv-ano','cv-km'].forEach(x=>document.getElementById(x).value='');
+  renderTempVehs();
+}
+
+function remVeh(i){tempVehs.splice(i,1);renderTempVehs();}
+
+function renderTempVehs(){
+  const list=document.getElementById('cl-vehs-list');
+  if(!tempVehs.length){list.innerHTML='<div style="color:var(--steel);font-family:\'Share Tech Mono\',monospace;font-size:10px;padding:6px 0;margin-bottom:6px">NENHUM VEÍCULO CADASTRADO</div>';return;}
+  list.innerHTML=tempVehs.map((v,i)=>`
+    <div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--bg1);border:1px solid var(--line);margin-bottom:6px">
+      <span class="plate" style="font-size:11px">${v.placa}</span>
+      <span style="flex:1;font-size:13px">${v.modelo}</span>
+      <span style="color:var(--steel);font-size:11px">${v.ano||''}${v.km?' | KM '+v.km:''}</span>
+      <button class="btn btn-danger" style="padding:2px 8px" onclick="remVeh(${i})">✕</button>
+    </div>`).join('');
+}
 
 function saveCL(){
   const nm=document.getElementById('c-nm').value.trim();
   if(!nm){alert('Informe o nome!');return;}
-  CL.push({id:uid(),nome:nm,telefone:document.getElementById('c-tl').value.trim(),doc:document.getElementById('c-dc').value.trim(),end:document.getElementById('c-en').value.trim(),obs:document.getElementById('c-ob').value.trim()});
+  const obj={
+    id:editCLId||uid(),
+    nome:nm,
+    telefone:document.getElementById('c-tl').value.trim(),
+    doc:document.getElementById('c-dc').value.trim(),
+    end:document.getElementById('c-en').value.trim(),
+    obs:document.getElementById('c-ob').value.trim(),
+    veiculos:JSON.parse(JSON.stringify(tempVehs)),
+  };
+  if(editCLId){const i=CL.findIndex(c=>c.id===editCLId);CL[i]=obj;}
+  else CL.push(obj);
   persist();closeCL();renderClients();
 }
+
+function delCL(id){if(!confirm('Excluir cliente?'))return;CL=CL.filter(c=>c.id!==id);persist();renderClients();}
 
 function renderClients(){
   const q=(document.getElementById('cq')?.value||'').toLowerCase();
@@ -968,22 +1259,25 @@ function renderClients(){
   list.innerHTML=data.map(c=>{
     const ct=OS.filter(o=>o.cliente.toLowerCase()===c.nome.toLowerCase()).length;
     const ini=c.nome.split(' ').slice(0,2).map(w=>w[0]).join('').toUpperCase();
+    const vehs=c.veiculos||[];
     return `<div class="client-card">
-      <div class="c-avatar">${ini}</div>
-      <div class="c-info">
-        <div class="c-name">${c.nome}</div>
-        <div class="c-meta">${c.telefone?'📱 '+c.telefone:''}${c.doc?' | '+c.doc:''}${c.end?'<br>📍 '+c.end:''}</div>
+      <div class="client-card-top">
+        <div class="c-avatar">${ini}</div>
+        <div class="c-info">
+          <div class="c-name">${c.nome}</div>
+          <div class="c-meta">${c.telefone?'📱 '+c.telefone:''}${c.doc?' | '+c.doc:''}${c.end?'<br>📍 '+c.end:''}</div>
+        </div>
+        <div class="c-stats"><div class="c-count">${ct}</div><div class="c-lbl">OS registradas</div></div>
+        <div class="acts">
+          <button class="btn btn-ghost btn-sm" onclick="filtByClient('${c.nome}')">Ver OS</button>
+          <button class="btn btn-metal btn-sm" onclick="openCL('${c.id}')">✎ Editar</button>
+          <button class="btn btn-danger" onclick="delCL('${c.id}')">✕</button>
+        </div>
       </div>
-      <div class="c-stats"><div class="c-count">${ct}</div><div class="c-lbl">OS registradas</div></div>
-      <div class="acts">
-        <button class="btn btn-ghost btn-sm" onclick="filtByClient('${c.nome}')">Ver OS</button>
-        <button class="btn btn-danger" onclick="delCL('${c.id}')">✕</button>
-      </div>
+      ${vehs.length?`<div class="veh-tags">${vehs.map(v=>`<div class="veh-tag"><span class="veh-tag-plate">${v.placa}</span><span class="veh-tag-info">${v.modelo}${v.ano?' · '+v.ano:''}${v.km?' · KM '+v.km:''}</span></div>`).join('')}</div>`:''}
     </div>`;
   }).join('');
 }
-
-function delCL(id){if(!confirm('Excluir cliente?'))return;CL=CL.filter(c=>c.id!==id);persist();renderClients();}
 
 function filtByClient(nm){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
@@ -1000,41 +1294,53 @@ function renderFin(){
   const stFilter=document.getElementById('fin-status').value;
 
   let data=OS.filter(o=>{
-    const d=new Date((o.entrada||o.date||'2000-01-01').replace(/(\d{2})\/(\d{2})\/(\d{4})/,'$3-$2-$1'));
-    if(ano && d.getFullYear()!==ano) return false;
-    if(mes && d.getMonth()+1!==mes) return false;
-    if(stFilter!=='all' && o.status!==stFilter) return false;
+    const d=new Date((o.entrada||'2000-01-01').replace(/(\d{2})\/(\d{2})\/(\d{4})/,'$3-$2-$1')+'T00:00');
+    if(ano&&d.getFullYear()!==ano)return false;
+    if(mes&&d.getMonth()+1!==mes)return false;
+    if(stFilter!=='all'&&o.status!==stFilter)return false;
     return true;
   });
 
-  // totals by type
   const totals={sta:0,pca:0,ret:0,out:0,geral:0};
+  let totalRecebido=0,totalEmAberto=0;
   data.forEach(o=>{
-    (o.svcs||[]).forEach(s=>{
-      totals[s.tp]=(totals[s.tp]||0)+s.total;
-      totals.geral+=s.total;
-    });
+    (o.svcs||[]).forEach(s=>{totals[s.tp]=(totals[s.tp]||0)+s.total;totals.geral+=s.total;});
+    const pago=(o.pagamentos||[]).reduce((s,p)=>s+parsN(p.val),0);
+    totalRecebido+=pago;
+    const saldo=(parseFloat(o.total)||0)-pago;
+    if(saldo>0)totalEmAberto+=saldo;
   });
 
-  // CARDS
+  // Cards principais
   document.getElementById('fin-cards').innerHTML=`
     <div class="fin-card"><div class="fin-card-bar sta"></div><div class="fin-card-lbl">Serv. Técnico Automotivo</div><div class="fin-card-val blue">R$&nbsp;${fmt(totals.sta)}</div><div class="fin-card-sub">${data.filter(o=>(o.svcs||[]).some(s=>s.tp==='sta')).length} OS</div></div>
     <div class="fin-card"><div class="fin-card-bar pca"></div><div class="fin-card-lbl">Peças</div><div class="fin-card-val yellow">R$&nbsp;${fmt(totals.pca)}</div><div class="fin-card-sub">${data.filter(o=>(o.svcs||[]).some(s=>s.tp==='pca')).length} OS</div></div>
     <div class="fin-card"><div class="fin-card-bar ret"></div><div class="fin-card-lbl">Retífica</div><div class="fin-card-val purple">R$&nbsp;${fmt(totals.ret)}</div><div class="fin-card-sub">${data.filter(o=>(o.svcs||[]).some(s=>s.tp==='ret')).length} OS</div></div>
-    <div class="fin-card" style="grid-column:span 1"><div class="fin-card-bar tot"></div><div class="fin-card-lbl">Total Geral</div><div class="fin-card-val chrome">R$&nbsp;${fmt(totals.geral)}</div><div class="fin-card-sub">${data.length} ordens no período</div></div>
+    <div class="fin-card"><div class="fin-card-bar tot"></div><div class="fin-card-lbl">Faturamento Total</div><div class="fin-card-val chrome">R$&nbsp;${fmt(totals.geral)}</div><div class="fin-card-sub">${data.length} ordens</div></div>
   `;
 
-  // GRÁFICO últimos 6 meses (sempre mostra independente do filtro)
+  // Cards secundários
+  const totalCaixaGeral=OS.filter(o=>{
+    const d=new Date((o.entrada||'2000-01-01').replace(/(\d{2})\/(\d{2})\/(\d{4})/,'$3-$2-$1')+'T00:00');
+    if(ano&&d.getFullYear()!==ano)return false;
+    if(mes&&d.getMonth()+1!==mes)return false;
+    return true;
+  }).reduce((s,o)=>(o.caixaProprio||[]).reduce((a,c)=>a+parsN(c.val),s),0);
+
+  document.getElementById('fin-cards2').innerHTML=`
+    <div class="fin-card"><div class="fin-card-bar rec"></div><div class="fin-card-lbl">Total Recebido</div><div class="fin-card-val green">R$&nbsp;${fmt(totalRecebido)}</div><div class="fin-card-sub">pagamentos confirmados</div></div>
+    <div class="fin-card"><div class="fin-card-bar dev"></div><div class="fin-card-lbl">A Receber (em aberto)</div><div class="fin-card-val red">R$&nbsp;${fmt(totalEmAberto)}</div><div class="fin-card-sub">${data.filter(o=>pagStatus(o)!=='quitado').length} OS pendentes</div></div>
+    <div class="fin-card"><div class="fin-card-bar cxa"></div><div class="fin-card-lbl">Caixa Victor (reembolso)</div><div class="fin-card-val red">R$&nbsp;${fmt(totalCaixaGeral)}</div><div class="fin-card-sub">saídas do bolso</div></div>
+  `;
+
+  // Gráfico
   const chartData=[];
   for(let i=5;i>=0;i--){
     const d=new Date();d.setDate(1);d.setMonth(d.getMonth()-i);
     const y=d.getFullYear(),m=d.getMonth()+1;
     const label=d.toLocaleDateString('pt-BR',{month:'short'}).replace('.','');
-    const val=OS.filter(o=>{
-      const od=new Date((o.entrada||'2000-01-01').replace(/(\d{2})\/(\d{2})\/(\d{4})/,'$3-$2-$1')+'T00:00');
-      return od.getFullYear()===y&&od.getMonth()+1===m;
-    }).reduce((s,o)=>s+(parseFloat(o.total)||0),0);
-    chartData.push({label,val,y,m});
+    const val=OS.filter(o=>{const od=new Date((o.entrada||'2000-01-01').replace(/(\d{2})\/(\d{2})\/(\d{4})/,'$3-$2-$1')+'T00:00');return od.getFullYear()===y&&od.getMonth()+1===m;}).reduce((s,o)=>s+(parseFloat(o.total)||0),0);
+    chartData.push({label,val});
   }
   const maxVal=Math.max(...chartData.map(d=>d.val),1);
   document.getElementById('fin-chart').innerHTML=chartData.map(d=>`
@@ -1044,8 +1350,7 @@ function renderFin(){
       <div class="month-col-lbl">${d.label.toUpperCase()}</div>
     </div>`).join('');
 
-  // BREAKDOWN
-  const grandTotal=totals.geral||1;
+  // Breakdown
   const cats=[
     {key:'sta',lbl:'Serv. Técnico Automotivo',cls:'tp-sta',bg:'var(--blue)'},
     {key:'pca',lbl:'Peças',cls:'tp-pca',bg:'var(--yellow)'},
@@ -1066,38 +1371,90 @@ function renderFin(){
     </div>`;
   }).join('');
 
-  // INDICADORES
+  // Indicadores
   const ticket=data.length>0?totals.geral/data.length:0;
   const concl=data.filter(o=>o.status==='concluida'||o.status==='entregue').length;
+  const quitadas=data.filter(o=>pagStatus(o)==='quitado').length;
   document.getElementById('fin-indicadores').innerHTML=`
     <div style="margin-bottom:14px">
       <div style="font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--steel);margin-bottom:4px">TICKET MÉDIO POR OS</div>
       <div style="font-family:'Orbitron',monospace;font-size:22px;font-weight:700;color:var(--chrome)">R$ ${fmt(ticket)}</div>
     </div>
     <div style="margin-bottom:14px">
-      <div style="font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--steel);margin-bottom:4px">OS CONCLUÍDAS / ENTREGUES</div>
-      <div style="font-family:'Orbitron',monospace;font-size:22px;font-weight:700;color:var(--green)">${concl} <span style="font-size:14px;color:var(--steel)">de ${data.length}</span></div>
+      <div style="font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--steel);margin-bottom:4px">OS QUITADAS</div>
+      <div style="font-family:'Orbitron',monospace;font-size:22px;font-weight:700;color:var(--green)">${quitadas} <span style="font-size:14px;color:var(--steel)">de ${data.length}</span></div>
     </div>
     <div>
-      <div style="font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--steel);margin-bottom:4px">TAXA DE CONCLUSÃO</div>
+      <div style="font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--steel);margin-bottom:4px">TAXA CONCLUSÃO</div>
       <div style="font-family:'Orbitron',monospace;font-size:22px;font-weight:700;color:var(--chrome)">${data.length>0?((concl/data.length)*100).toFixed(0):0}%</div>
     </div>
   `;
 
-  // LISTA OS
+  // Devedores
+  const devedores=data.filter(o=>pagStatus(o)!=='quitado');
+  document.getElementById('fin-devedores').innerHTML=devedores.length?devedores.map(o=>{
+    const pago=(o.pagamentos||[]).reduce((s,p)=>s+parsN(p.val),0);
+    const saldo=(parseFloat(o.total)||0)-pago;
+    return `<div class="dev-row">
+      <div>
+        <div style="font-weight:500">${o.cliente} <span style="font-size:11px;color:var(--steel)">— ${o.modelo} / ${o.placa}</span></div>
+        <div style="font-size:11px;color:var(--steel);margin-top:2px">OS #${o.num} · Entrada: ${isoToBR(o.entrada)}</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px">
+        ${pagBadge(o)}
+        <span style="font-family:'Orbitron',monospace;font-size:14px;color:#c44040">Deve: R$ ${fmt(saldo)}</span>
+        <button class="btn btn-ghost btn-sm" onclick="viewOS('${o.id}')">◉</button>
+      </div>
+    </div>`;
+  }).join(''):'<div style="color:var(--steel);font-family:\'Share Tech Mono\',monospace;font-size:10px">✓ NENHUM DEVEDOR NO PERÍODO</div>';
+
+  // Caixa Victor
+  const caixaItems=[];
+  OS.filter(o=>{
+    const d=new Date((o.entrada||'2000-01-01').replace(/(\d{2})\/(\d{2})\/(\d{4})/,'$3-$2-$1')+'T00:00');
+    if(ano&&d.getFullYear()!==ano)return false;
+    if(mes&&d.getMonth()+1!==mes)return false;
+    return true;
+  }).forEach(o=>(o.caixaProprio||[]).forEach(c=>caixaItems.push({...c,cliente:o.cliente,osNum:o.num,osId:o.id})));
+  document.getElementById('fin-caixa').innerHTML=caixaItems.length?caixaItems.map(c=>`
+    <div class="cxa-item">
+      <div>
+        <div style="font-size:13px">${c.desc}</div>
+        <div style="font-size:11px;color:var(--steel);margin-top:2px">OS #${c.osNum} · ${c.cliente} · ${isoToBR(c.data)}</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <span style="font-family:'Orbitron',monospace;font-size:14px;color:#c44040">- R$ ${fmt(c.val)}</span>
+        <button class="btn btn-ghost btn-sm" onclick="viewOS('${c.osId}')">◉</button>
+      </div>
+    </div>`).join(''):'<div style="color:var(--steel);font-family:\'Share Tech Mono\',monospace;font-size:10px">✓ NENHUMA SAÍDA NO PERÍODO</div>';
+
+  // NF Pendentes
+  const nfPend=data.filter(o=>!o.nfNum&&(o.status==='concluida'||o.status==='entregue'));
+  document.getElementById('fin-nf-pend').innerHTML=nfPend.length?nfPend.map(o=>`
+    <div class="os-row-fin">
+      <div><span class="os-num" style="font-size:13px">#${o.num}</span> &nbsp; <strong>${o.cliente}</strong> <span style="color:var(--steel);font-size:12px">— ${o.modelo} / ${o.placa}</span></div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--steel)">${isoToBR(o.entrada)}</span>
+        <span style="font-family:'Orbitron',monospace;font-size:13px;color:var(--chrome)">R$ ${fmt(o.total)}</span>
+        <button class="btn btn-ghost btn-sm" onclick="viewOS('${o.id}');closeView=closeView">◉</button>
+      </div>
+    </div>`).join(''):'<div style="color:var(--steel);font-family:\'Share Tech Mono\',monospace;font-size:10px">✓ TODAS AS OS CONCLUÍDAS TÊM NOTA FISCAL</div>';
+
+  // Lista OS
   document.getElementById('fin-os-list').innerHTML=data.length?data.slice().reverse().map(o=>`
     <div class="os-row-fin">
       <div style="display:flex;align-items:center;gap:12px">
         <span class="os-num" style="font-size:13px">#${o.num}</span>
         <div>
-          <div style="font-weight:500;color:var(--white)">${o.cliente}</div>
-          <div style="font-size:11px;color:var(--steel)">${o.modelo} • <span class="plate" style="font-size:10px;padding:1px 6px">${o.placa}</span></div>
+          <div style="font-weight:500">${o.cliente}</div>
+          <div style="font-size:11px;color:var(--steel)">${o.modelo} · <span class="plate" style="font-size:10px;padding:1px 5px">${o.placa}</span></div>
         </div>
       </div>
-      <div style="display:flex;align-items:center;gap:16px">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
         <span class="entrada-tag">${isoToBR(o.entrada)}</span>
         ${badge(o.status)}
-        <span style="font-family:'Orbitron',monospace;font-size:14px;color:var(--chrome)">R$ ${fmt(o.total)}</span>
+        ${pagBadge(o)}
+        <span style="font-family:'Orbitron',monospace;font-size:13px;color:var(--chrome)">R$ ${fmt(o.total)}</span>
         <button class="btn btn-ghost btn-sm" onclick="viewOS('${o.id}')">◉</button>
       </div>
     </div>`).join('')
