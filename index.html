@@ -775,6 +775,7 @@ input::placeholder,textarea::placeholder{color:var(--steel);opacity:.55}
         </div>
         <div id="pag-list"></div>
         <div style="display:flex;gap:6px;align-items:center;margin-top:10px;flex-wrap:wrap">
+          <input id="np-desc" placeholder="Referente a (ex: Retífica, Sinal…)" style="flex:2;min-width:160px">
           <input id="np-val" placeholder="Valor R$" style="flex:1;min-width:100px">
           <select id="np-forma" style="flex:1.5;min-width:130px">
             <option value="Dinheiro">Dinheiro</option>
@@ -1528,11 +1529,13 @@ function renderChk(){
 
 // ── PAGAMENTOS ────────────────────────────────────────
 function addPag(){
+  const desc=document.getElementById('np-desc').value.trim();
   const val=parsN(document.getElementById('np-val').value);
   const forma=document.getElementById('np-forma').value;
   const data=document.getElementById('np-data').value;
   if(!val||val<=0){alert('Informe um valor válido!');return;}
-  pagamentos.push({id:uid(),val,forma,data});
+  pagamentos.push({id:uid(),desc,val,forma,data});
+  document.getElementById('np-desc').value='';
   document.getElementById('np-val').value='';
   renderPag();
 }
@@ -1547,6 +1550,7 @@ function renderPag(){
 
   list.innerHTML=pagamentos.length?pagamentos.map((p,i)=>`
     <div class="pag-row">
+      ${p.desc?`<span style="flex:1;min-width:90px;font-size:12px;color:var(--white)">${p.desc}</span>`:'<span style="flex:1;min-width:90px;font-size:12px;color:var(--steel)">—</span>'}
       <span class="pag-forma">${p.forma}</span>
       <span class="pag-val">R$ ${fmt(p.val)}</span>
       <span class="pag-data">${isoToBR(p.data)}</span>
@@ -1677,7 +1681,7 @@ function viewOS(id){
 
     ${(o.pagamentos||[]).length?`<div style="border:1px solid var(--line);margin-bottom:14px;overflow:hidden">
       <div style="background:var(--bg3);padding:9px 14px;font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--accent2)">Pagamentos Recebidos</div>
-      ${(o.pagamentos||[]).map(p=>`<div class="pag-row"><span class="pag-forma">${p.forma}</span><span class="pag-val">R$ ${fmt(p.val)}</span><span class="pag-data">${isoToBR(p.data)}</span></div>`).join('')}
+      ${(o.pagamentos||[]).map(p=>`<div class="pag-row">${p.desc?`<span style="flex:1;min-width:90px;font-size:12px;color:var(--white)">${p.desc}</span>`:''}<span class="pag-forma">${p.forma}</span><span class="pag-val">R$ ${fmt(p.val)}</span><span class="pag-data">${isoToBR(p.data)}</span></div>`).join('')}
       <div style="display:flex;gap:16px;padding:10px 14px;background:var(--bg2);border-top:1px solid var(--line);font-family:'Share Tech Mono',monospace;font-size:10px;flex-wrap:wrap">
         <span>TOTAL: <strong style="color:var(--chrome)">R$ ${fmt(o.total)}</strong></span>
         <span>RECEBIDO: <strong style="color:var(--green)">R$ ${fmt(pago)}</strong></span>
@@ -1766,7 +1770,7 @@ function printOS(o){
   <tr class="tot-row"><td colspan="3"></td><td><strong>TOTAL GERAL</strong></td><td><strong>R$ ${fmt(o.total)}</strong></td></tr>
   </tbody></table>`:''}
   ${(o.pagamentos||[]).length?`<div class="lbl" style="margin-top:12px">Pagamentos</div>
-  <div class="pag-box">${(o.pagamentos||[]).map(p=>`<div>${p.forma}: R$ ${fmt(p.val)} — ${isoToBR(p.data)}</div>`).join('')}
+  <div class="pag-box">${(o.pagamentos||[]).map(p=>`<div>${p.desc?p.desc+' — ':''}${p.forma}: R$ ${fmt(p.val)} — ${isoToBR(p.data)}</div>`).join('')}
   <div style="margin-top:6px;font-weight:700">Recebido: R$ ${fmt(pago)} | Saldo: R$ ${fmt(Math.abs(saldo))}${saldo>0?' (em aberto)':saldo<0?' (troco)':' (quitado)'}</div></div>`:''}
   ${(o.caixaProprio||[]).length?`<div class="lbl" style="margin-top:12px">Saídas do Caixa</div>
   <div class="cx-box">${(o.caixaProprio||[]).map(c=>`<div>${c.desc}: R$ ${fmt(c.val)} — ${isoToBR(c.data)}</div>`).join('')}
