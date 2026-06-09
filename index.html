@@ -244,134 +244,154 @@ input::placeholder,textarea::placeholder{color:var(--bg4)}
 ══════════════════════════════ */
 @media (max-width: 768px) {
 
+  body { font-size: 14px; }
+
   /* HEADER */
-  .header { padding: 0 14px; height: 52px; }
-  .logo-name { font-size: 14px; letter-spacing: 2px; }
-  .logo-mark { width: 30px; height: 30px; font-size: 14px; }
+  .header { padding: 0 16px; height: 56px; }
+  .logo-name { font-size: 16px; letter-spacing: 2px; }
+  .logo-mark { width: 32px; height: 32px; font-size: 15px; }
   .logo-tagline { font-size: 7px; letter-spacing: 1px; }
-  .header-meta { font-size: 8px; letter-spacing: 0; }
-  .logo { gap: 8px; }
+  .header-meta { display: none; }
+  .logo { gap: 10px; }
 
   /* NAV */
-  .nav { padding: 0 4px; overflow-x: auto; gap: 0; }
+  .nav { padding: 0; overflow-x: auto; gap: 0; }
   .nav::-webkit-scrollbar { display: none; }
-  .nav-tab { padding: 10px 10px; font-size: 9px; letter-spacing: 1px; white-space: nowrap; }
+  .nav-tab { padding: 14px 14px; font-size: 11px; letter-spacing: 1px; white-space: nowrap; flex: 1; }
 
   /* WRAP */
-  .wrap { padding: 12px 12px; }
+  .wrap { padding: 16px 14px; }
 
   /* STATS */
-  .stats { grid-template-columns: 1fr 1fr !important; gap: 8px; margin-bottom: 14px; }
-  .stat { padding: 10px 12px; }
-  .stat-val { font-size: 22px; }
-  .stat-lbl { font-size: 8px; }
+  .stats { grid-template-columns: 1fr 1fr !important; gap: 10px; margin-bottom: 18px; }
+  .stat { padding: 14px 16px; }
+  .stat-val { font-size: 26px; }
+  .stat-lbl { font-size: 9px; margin-bottom: 8px; }
 
   /* TOOLBAR */
-  .toolbar { flex-direction: column; align-items: stretch; gap: 8px; }
-  .filter-row { gap: 4px; }
-  .pill { padding: 5px 10px; font-size: 9px; letter-spacing: 1px; }
-  .right-tools { flex-direction: column; gap: 6px; }
-  .search-wrap { max-width: 100%; }
-  .btn-steel { width: 100%; justify-content: center; }
+  .toolbar { flex-direction: column; align-items: stretch; gap: 10px; }
+  .filter-row { gap: 6px; overflow-x: auto; padding-bottom: 4px; }
+  .filter-row::-webkit-scrollbar { display: none; }
+  .pill { padding: 8px 14px; font-size: 11px; letter-spacing: 1px; white-space: nowrap; }
+  .right-tools { flex-direction: column; gap: 8px; }
+  .search-wrap { max-width: 100%; padding: 11px 14px; }
+  .search-wrap input { font-size: 15px; }
+  .btn-steel { width: 100%; justify-content: center; padding: 13px; font-size: 14px; }
 
-  /* TABLE — vira cards no mobile */
-  .table-shell { overflow: hidden; }
-  table { display: none; }
-  #os-body { display: block; }
+  /* TABLE — esconde só thead, tbody vira cards */
+  #page-os thead { display: none; }
+  #page-os .table-shell table { width: 100%; }
+  #page-os tbody tr { display: block; width: 100%; border-bottom: 1px solid var(--line); }
+  #page-os tbody tr:last-child { border-bottom: none; }
 
   /* OS CARDS no mobile */
   .os-card-mobile {
-    padding: 12px 14px;
+    padding: 16px;
     border-bottom: 1px solid var(--line);
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 12px;
+    cursor: pointer;
+    transition: background .15s;
   }
-
+  .os-card-mobile:active { background: var(--bg3); }
   .os-card-mobile:last-child { border-bottom: none; }
 
   .os-card-top {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
   }
+  .os-card-top .os-num { font-size: 17px; }
 
   .os-card-bottom {
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    gap: 6px;
+    gap: 8px;
+    padding-top: 4px;
+    border-top: 1px solid var(--line);
   }
+
+  .os-card-cliente { font-size: 16px; }
+  .os-card-veiculo { font-size: 14px; }
 
   /* MODAL */
   .overlay { padding: 0; align-items: flex-end; }
   .modal {
     max-width: 100% !important;
     margin: 0;
-    border-radius: 0;
     border-left: none;
-    max-height: 92vh;
+    max-height: 94vh;
     overflow-y: auto;
     transform: translateY(100%);
   }
   .overlay.open .modal { transform: translateY(0); }
-  .modal-body { padding: 16px; }
-  .modal-top { padding: 14px 16px; }
-  .modal-title { font-size: 13px; letter-spacing: 1px; }
-  .modal-foot { padding: 12px 16px; flex-wrap: wrap; gap: 8px; }
-  .modal-foot .btn { flex: 1; justify-content: center; min-width: 80px; }
+  .modal-body { padding: 18px 16px; }
+  .modal-top { padding: 16px; }
+  .modal-title { font-size: 15px; letter-spacing: 1px; }
+  .modal-foot { padding: 14px 16px; flex-wrap: wrap; gap: 8px; position: sticky; bottom: 0; }
+  .modal-foot .btn { flex: 1; justify-content: center; min-width: 90px; padding: 13px; font-size: 13px; }
 
-  /* FORM GRIDS */
+  /* FORM */
+  .fsec-title { font-size: 11px; }
+  label { font-size: 10px; }
+  input, select, textarea { font-size: 16px; padding: 11px 12px; }
+  .fgrid { gap: 14px; }
   .g2, .g3, .g4 { grid-template-columns: 1fr !important; }
   .sp2, .sp3, .sp4 { grid-column: span 1 !important; }
 
-  /* SERVIÇOS TABLE */
-  .svc-shell table { display: table; }
-  .svc-shell th:nth-child(2),
-  .svc-shell td:nth-child(2),
-  .svc-shell th:nth-child(3),
-  .svc-shell td:nth-child(3) { display: none; }
+  /* SERVIÇOS */
+  .svc-shell { overflow-x: auto; }
   .svc-add { flex-wrap: wrap; }
-  .svc-add input, .svc-add select { min-width: calc(50% - 4px); }
+  .svc-add input, .svc-add select { min-width: calc(50% - 4px); font-size: 14px; }
+  .svc-add .btn { width: 100%; }
 
-  /* TOTALS BAR */
-  .totals-bar { flex-direction: column; align-items: flex-start; gap: 6px; }
-  .totals-breakdown { font-size: 10px; line-height: 2; }
-  .grand-total { font-size: 18px; }
-
-  /* FINANCEIRO */
-  .fin-grid { grid-template-columns: 1fr 1fr !important; }
-  #fin-cards2 { grid-template-columns: 1fr !important; }
-
-  /* FIN SECTION */
-  .fin-section { padding: 14px; }
-  div[style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; display: grid; }
-
-  /* CLIENTES */
-  .client-card-top { flex-wrap: wrap; gap: 10px; }
-  .c-stats { display: none; }
-  .acts { flex-wrap: wrap; gap: 4px; }
-  .acts .btn { font-size: 10px; padding: 5px 10px; }
+  /* TOTALS */
+  .totals-bar { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .totals-breakdown { font-size: 11px; line-height: 2.2; }
+  .grand-total { font-size: 20px; }
 
   /* PAGAMENTOS */
-  .pag-row { flex-wrap: wrap; gap: 4px; }
-  .pag-forma { min-width: unset; font-size: 9px; }
+  #pag-list .pag-row, .pag-row { flex-wrap: wrap; gap: 6px; padding: 10px; }
+  .pag-forma { min-width: unset; font-size: 10px; }
+  .pag-val { font-size: 15px; }
+
+  /* FINANCEIRO */
+  .fin-grid { grid-template-columns: 1fr 1fr !important; gap: 10px; }
+  #fin-cards2 { grid-template-columns: 1fr !important; }
+  .fin-card { padding: 14px; }
+  .fin-card-val { font-size: 18px; }
+  .fin-section { padding: 16px; }
+  .fin-filter { flex-direction: column; align-items: stretch; }
+  .fin-filter select { width: 100%; font-size: 15px; padding: 11px; }
+  .month-bar { height: 100px; }
+
+  /* CLIENTES */
+  .client-card { padding: 16px; }
+  .client-card-top { flex-wrap: wrap; gap: 12px; }
+  .c-name { font-size: 16px; }
+  .c-meta { font-size: 12px; }
+  .c-stats { margin-right: 0; }
+  .acts { flex-wrap: wrap; gap: 6px; width: 100%; }
+  .acts .btn { flex: 1; font-size: 11px; padding: 9px 10px; justify-content: center; }
 
   /* RELATÓRIO */
   #rp-status { grid-template-columns: 1fr 1fr !important; }
 
-  /* BADGES */
-  .badge { font-size: 9px; padding: 2px 7px; }
+  /* VIEW OS */
+  #vw-body > div { margin-bottom: 12px !important; }
+  #vw-body div[style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; }
 
-  /* PLATE */
-  .plate { font-size: 10px; letter-spacing: 1px; padding: 2px 5px; }
+  /* BADGES */
+  .badge { font-size: 10px; padding: 4px 9px; }
+  .plate { font-size: 12px; letter-spacing: 2px; padding: 3px 8px; }
 }
 
 @media (max-width: 400px) {
   .stats { grid-template-columns: 1fr 1fr !important; }
   .fin-grid { grid-template-columns: 1fr !important; }
-  .nav-tab { padding: 10px 8px; font-size: 8px; }
 }
 </style>
 </head>
@@ -1063,24 +1083,24 @@ function renderOS(){
   const isMobile=window.innerWidth<=768;
   if(isMobile){
     tb.innerHTML=data.map(o=>`
-      <div class="os-card-mobile">
+      <tr><td style="display:block !important;padding:0 !important">
+      <div class="os-card-mobile" onclick="viewOS('${o.id}')">
         <div class="os-card-top">
           <div>
             <span class="os-num">#${o.num}</span>
-            <span class="entrada-tag" style="margin-left:8px">${isoToBR(o.entrada)}</span>
+            <span class="entrada-tag" style="margin-left:10px">${isoToBR(o.entrada)}</span>
           </div>
-          <div style="display:flex;gap:4px">
-            <button class="btn btn-ghost btn-sm" onclick="viewOS('${o.id}')">◉</button>
+          <div style="display:flex;gap:6px" onclick="event.stopPropagation()">
             <button class="btn btn-ghost btn-sm" onclick="editOS('${o.id}')">✎</button>
             <button class="btn btn-danger" onclick="delOS('${o.id}')">✕</button>
           </div>
         </div>
-        <div>
-          <strong style="color:var(--white);font-size:14px">${o.cliente||'—'}</strong>
-          ${o.telefone?`<span style="color:var(--steel);font-size:11px;margin-left:8px">${o.telefone}</span>`:''}
+        <div class="os-card-cliente">
+          <strong style="color:var(--white)">${o.cliente||'—'}</strong>
+          ${o.telefone?`<div style="color:var(--steel);font-size:12px;margin-top:2px">${o.telefone}</div>`:''}
         </div>
-        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-          <span style="color:var(--chrome);font-size:13px">${o.modelo||'—'}</span>
+        <div class="os-card-veiculo" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <span style="color:var(--chrome)">${o.modelo||'—'}</span>
           <span class="plate">${o.placa||'—'}</span>
         </div>
         <div class="os-card-bottom">
@@ -1088,9 +1108,10 @@ function renderOS(){
             ${badge(o.status)}
             ${pagBadge(o)}
           </div>
-          <strong style="font-family:'Orbitron',monospace;font-size:14px;color:var(--chrome)">R$ ${fmt(o.total)}</strong>
+          <strong style="font-family:'Orbitron',monospace;font-size:16px;color:var(--chrome)">R$ ${fmt(o.total)}</strong>
         </div>
-      </div>`).join('');
+      </div>
+      </td></tr>`).join('');
   } else {
     tb.innerHTML=data.map(o=>`
       <tr>
