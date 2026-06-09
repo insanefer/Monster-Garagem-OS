@@ -686,9 +686,8 @@ async function loadAll(){
   renderOS();
   updateStats();
 
-  // Tenta conectar Supabase em background
+  // Tenta conectar Supabase em background — SEM loader de tela cheia
   try {
-    showLoader('CONECTANDO AO BANCO…');
     const ctrl = new AbortController();
     const timeout = setTimeout(()=>ctrl.abort(), 8000);
 
@@ -704,9 +703,7 @@ async function loadAll(){
     OS = osData.map(mapFromDB_OS);
     CL = clData.map(mapFromDB_CL);
 
-    // Migrar localStorage → Supabase se banco vazio
     if(OS.length===0 && oldOS.length>0){
-      showLoader('MIGRANDO DADOS LOCAIS…');
       for(const o of oldOS){ try{ await sbInsert('ordens', mapToDB_OS(o)); }catch(e){console.warn('migrate OS',e);} }
       OS = oldOS;
       localStorage.removeItem('mg3_os');
@@ -718,16 +715,13 @@ async function loadAll(){
       localStorage.removeItem('mg3_cl');
     }
 
-    hideLoader();
     renderOS();
     updateStats();
     showToast('✓ CONECTADO AO BANCO');
 
   } catch(e){
-    hideLoader();
     console.warn('Supabase offline, usando dados locais:', e.message);
-    // UI já está carregada com dados locais — não trava nada
-    if(e.name!=='AbortError') showToast('⚠ MODO OFFLINE', false);
+    if(e.name!=='AbortError') showToast('⚠ MODO OFFLINE — DADOS LOCAIS', false);
   }
 }
 
@@ -1112,9 +1106,7 @@ async function saveOS(){
       await persistCL(newCL, true);
     }
   }
-  showLoader(isNew?'SALVANDO OS…':'ATUALIZANDO OS…');
   await persistOS(obj, isNew);
-  hideLoader();
   showToast(isNew?'✓ OS CRIADA':'✓ OS ATUALIZADA');
   closeOS();renderOS();
 }
@@ -1490,9 +1482,7 @@ async function saveCL(){
   };
   if(editCLId){const i=CL.findIndex(c=>c.id===editCLId);CL[i]=obj;}
   else CL.push(obj);
-  showLoader(isNew?'SALVANDO CLIENTE…':'ATUALIZANDO CLIENTE…');
   await persistCL(obj, isNew);
-  hideLoader();
   showToast(isNew?'✓ CLIENTE CADASTRADO':'✓ CLIENTE ATUALIZADO');
   closeCL();renderClients();
 }
@@ -1718,4 +1708,9 @@ function renderFin(){
 }
 
 // ── REPORT ────────────────────────────────────────────
-function renderR
+function renderReport(){
+  document.getElementById('rp-tot').textContent=OS.length;
+  document.getElementById('rp-fat').textContent='R$'+fmt(OS.reduce((s,o)=>s+(parseFloat(o.total)||0),0));
+  document.getElementById('rp-cli').textContent=CL.length;
+  const sm={aguardando:'Aguardando',andamento:'Em Andamento',concluida:'Concluída',entregue:'Entregue'};
+  con
