@@ -604,14 +604,239 @@ input::placeholder,textarea::placeholder{color:var(--bg4)}
 </div>
 
 <script>
+// ── SUPABASE CONFIG ────────────────────────────────────
+const SB_URL = 'https://garhicdxlkfrcclzsudf.supabase.co';
+const SB_KEY = 'sb_publishable_c78Kg-kNAkEktDXE2LuAGA_1BNkXbUh';
+
+const sbHeaders = {
+  'Content-Type': 'application/json',
+  'apikey': SB_KEY,
+  'Authorization': `Bearer ${SB_KEY}`,
+  'Prefer': 'return=representation'
+};
+
+async function sbGet(table, params=''){
+  const r = await fetch(`${SB_URL}/rest/v1/${table}?${params}`, {headers: sbHeaders});
+  if(!r.ok) throw new Error(`GET ${table} failed: ${r.status}`);
+  return r.json();
+}
+
+async function sbInsert(table, data){
+  const r = await fetch(`${SB_URL}/rest/v1/${table}`, {
+    method:'POST', headers: sbHeaders, body: JSON.stringify(data)
+  });
+  if(!r.ok){ const e=await r.text(); throw new Error(`INSERT ${table}: ${e}`); }
+  return r.json();
+}
+
+async function sbUpdate(table, id, data){
+  const r = await fetch(`${SB_URL}/rest/v1/${table}?id=eq.${id}`, {
+    method:'PATCH', headers: sbHeaders, body: JSON.stringify(data)
+  });
+  if(!r.ok){ const e=await r.text(); throw new Error(`UPDATE ${table}: ${e}`); }
+  return r.json();
+}
+
+async function sbDelete(table, id){
+  const r = await fetch(`${SB_URL}/rest/v1/${table}?id=eq.${id}`, {
+    method:'DELETE', headers: sbHeaders
+  });
+  if(!r.ok) throw new Error(`DELETE ${table} failed`);
+}
+
 // ── STATE ──────────────────────────────────────────────
-let OS  = JSON.parse(localStorage.getItem('mg3_os') || '[]');
-let CL  = JSON.parse(localStorage.getItem('mg3_cl') || '[]');
+let OS = [];
+let CL = [];
 let svcs=[],chklist=[],pagamentos=[],caixaProprio=[],tempVehs=[];
 let eid=null,fil='all',viewId=null,editCLId=null;
+let isLoading=false;
 
-// ── PERSIST ────────────────────────────────────────────
-function persist(){localStorage.setItem('mg3_os',JSON.stringify(OS));localStorage.setItem('mg3_cl',JSON.stringify(CL));}
+// ── LOADING ────────────────────────────────────────────
+function showLoader(msg='Carregando…'){
+  let el=document.getElementById('mg-loader');
+  if(!el){
+    el=document.createElement('div');
+    el.id='mg-loader';
+    el.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:9999;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px)';
+    el.innerHTML=`<div style="background:var(--bg2);border:1px solid var(--line2);padding:24px 36px;text-align:center">
+      <div style="font-family:\'Orbitron\',monospace;font-size:13px;letter-spacing:3px;color:var(--chrome);margin-bottom:8px">⚙ MONSTER GARAGE</div>
+      <div id="mg-loader-msg" style="font-family:\'Share Tech Mono\',monospace;font-size:10px;color:var(--steel);letter-spacing:2px">${msg}</div>
+    </div>`;
+    document.body.appendChild(el);
+  } else {
+    document.getElementById('mg-loader-msg').textContent=msg;
+  }
+}
+
+function hideLoader(){ const el=document.getElementById('mg-loader'); if(el) el.remove(); }
+
+function showToast(msg, ok=true){
+  const t=document.createElement('div');
+  t.style.cssText=`position:fixed;bottom:24px;right:24px;z-index:9999;padding:12px 20px;background:${ok?'var(--bg3)':'rgba(196,64,64,.15)'};border:1px solid ${ok?'var(--green)':'var(--red-bright)'};color:${ok?'var(--green)':'#c44040'};font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:1px;box-shadow:0 4px 20px rgba(0,0,0,.5);transition:opacity .3s`;
+  t.textContent=msg;
+  document.body.appendChild(t);
+  setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.remove(),400);},2500);
+}
+
+// ── LOAD DATA ──────────────────────────────────────────
+async function loadAll(){
+  showLoader('CONECTANDO AO BANCO…');
+  try {
+    // Migrar localStorage se existir
+    const oldOS = JSON.parse(localStorage.getItem('mg3_os')||'[]');
+    const oldCL = JSON.parse(localStorage.getItem('mg3_cl')||'[]');
+
+    const [osData, clData] = await Promise.all([
+      sbGet('ordens','order=created_at.asc'),
+      sbGet('clientes','order=created_at.asc')
+    ]);
+
+    OS = osData.map(mapFromDB_OS);
+    CL = clData.map(mapFromDB_CL);
+
+    // Migrar dados do localStorage se banco vazio e local tem dados
+    if(OS.length===0 && oldOS.length>0){
+      showLoader('MIGRANDO DADOS LOCAIS…');
+      for(const o of oldOS){ try{ await sbInsert('ordens', mapToDB_OS(o)); }catch(e){console.warn('migrate OS',e);} }
+      OS = oldOS;
+      localStorage.removeItem('mg3_os');
+      showToast('✓ DADOS LOCAIS MIGRADOS COM SUCESSO');
+    }
+    if(CL.length===0 && oldCL.length>0){
+      for(const c of oldCL){ try{ await sbInsert('clientes', mapToDB_CL(c)); }catch(e){console.warn('migrate CL',e);} }
+      CL = oldCL;
+      localStorage.removeItem('mg3_cl');
+    }
+
+    hideLoader();
+    renderOS();
+    updateStats();
+  } catch(e){
+    hideLoader();
+    console.error(e);
+    // Fallback para localStorage se Supabase falhar
+    OS = JSON.parse(localStorage.getItem('mg3_os')||'[]');
+    CL = JSON.parse(localStorage.getItem('mg3_cl')||'[]');
+    showToast('⚠ MODO OFFLINE — DADOS LOCAIS', false);
+    renderOS();
+    updateStats();
+  }
+}
+
+// ── DB MAPPERS ─────────────────────────────────────────
+function mapToDB_OS(o){
+  return {
+    id: o.id,
+    num: o.num,
+    cliente: o.cliente||'',
+    telefone: o.telefone||'',
+    modelo: o.modelo||'',
+    placa: o.placa||'',
+    ano: o.ano||'',
+    km: o.km||'',
+    queixa: o.queixa||'',
+    diag: o.diag||'',
+    svcs: o.svcs||[],
+    chklist: o.chklist||[],
+    pagamentos: o.pagamentos||[],
+    caixa_proprio: o.caixaProprio||[],
+    status: o.status||'aguardando',
+    entrada: o.entrada||'',
+    prev: o.prev||'',
+    nf_num: o.nfNum||'',
+    nf_data: o.nfData||'',
+    obs: o.obs||'',
+    total: parseFloat(o.total)||0,
+    date_criacao: o.date||''
+  };
+}
+
+function mapFromDB_OS(r){
+  return {
+    id: r.id,
+    num: r.num,
+    cliente: r.cliente,
+    telefone: r.telefone,
+    modelo: r.modelo,
+    placa: r.placa,
+    ano: r.ano,
+    km: r.km,
+    queixa: r.queixa,
+    diag: r.diag,
+    svcs: r.svcs||[],
+    chklist: r.chklist||[],
+    pagamentos: r.pagamentos||[],
+    caixaProprio: r.caixa_proprio||[],
+    status: r.status,
+    entrada: r.entrada,
+    prev: r.prev,
+    nfNum: r.nf_num,
+    nfData: r.nf_data,
+    obs: r.obs,
+    total: parseFloat(r.total)||0,
+    date: r.date_criacao
+  };
+}
+
+function mapToDB_CL(c){
+  return {
+    id: c.id,
+    nome: c.nome||'',
+    telefone: c.telefone||'',
+    doc: c.doc||'',
+    endereco: c.end||'',
+    obs: c.obs||'',
+    veiculos: c.veiculos||[]
+  };
+}
+
+function mapFromDB_CL(r){
+  return {
+    id: r.id,
+    nome: r.nome,
+    telefone: r.telefone,
+    doc: r.doc,
+    end: r.endereco,
+    obs: r.obs,
+    veiculos: r.veiculos||[]
+  };
+}
+
+// ── PERSIST (Supabase) ─────────────────────────────────
+async function persistOS(o, isNew){
+  const data = mapToDB_OS(o);
+  try {
+    if(isNew) await sbInsert('ordens', data);
+    else await sbUpdate('ordens', o.id, data);
+  } catch(e){
+    console.error('persistOS',e);
+    // fallback local
+    localStorage.setItem('mg3_os', JSON.stringify(OS));
+    showToast('⚠ SALVO LOCALMENTE', false);
+  }
+}
+
+async function persistCL(c, isNew){
+  const data = mapToDB_CL(c);
+  try {
+    if(isNew) await sbInsert('clientes', data);
+    else await sbUpdate('clientes', c.id, data);
+  } catch(e){
+    console.error('persistCL',e);
+    localStorage.setItem('mg3_cl', JSON.stringify(CL));
+    showToast('⚠ SALVO LOCALMENTE', false);
+  }
+}
+
+async function deleteOS_db(id){
+  try { await sbDelete('ordens', id); }
+  catch(e){ console.error('deleteOS',e); }
+}
+
+async function deleteCL_db(id){
+  try { await sbDelete('clientes', id); }
+  catch(e){ console.error('deleteCL',e); }
+}
 
 // ── UTILS ──────────────────────────────────────────────
 const uid=()=>Date.now().toString(36).toUpperCase()+Math.random().toString(36).slice(2,5).toUpperCase();
@@ -709,7 +934,13 @@ function renderOS(){
   updateStats();
 }
 
-function delOS(id){if(!confirm('Excluir esta OS?'))return;OS=OS.filter(o=>o.id!==id);persist();renderOS();}
+async function delOS(id){
+  if(!confirm('Excluir esta OS?'))return;
+  OS=OS.filter(o=>o.id!==id);
+  renderOS();
+  await deleteOS_db(id);
+  showToast('✓ OS EXCLUÍDA');
+}
 
 // ── CLIENT AUTOCOMPLETE ────────────────────────────────
 function clSearch(val){
@@ -835,12 +1066,13 @@ function editOS(id){
   document.getElementById('m-os').classList.add('open');
 }
 
-function saveOS(){
+async function saveOS(){
   const cli=document.getElementById('f-cli').value.trim();
   const mod=document.getElementById('f-mod').value.trim();
   const plc=document.getElementById('f-plc').value.trim();
   if(!cli||!mod||!plc){alert('Preencha Cliente, Modelo e Placa!');return;}
   const total=svcs.reduce((s,x)=>s+(parseFloat(x.total)||0),0);
+  const isNew=!eid;
   const obj={
     id:eid||uid(),
     num:eid?OS.find(o=>o.id===eid)?.num:nextNum(),
@@ -866,10 +1098,17 @@ function saveOS(){
   if(eid){const i=OS.findIndex(o=>o.id===eid);OS[i]=obj;}
   else{
     OS.push(obj);
-    if(!CL.find(c=>c.nome.toLowerCase()===cli.toLowerCase()))
-      CL.push({id:uid(),nome:cli,telefone:obj.telefone,doc:'',end:'',obs:'',veiculos:[]});
+    if(!CL.find(c=>c.nome.toLowerCase()===cli.toLowerCase())){
+      const newCL={id:uid(),nome:cli,telefone:obj.telefone,doc:'',end:'',obs:'',veiculos:[]};
+      CL.push(newCL);
+      await persistCL(newCL, true);
+    }
   }
-  persist();closeOS();renderOS();
+  showLoader(isNew?'SALVANDO OS…':'ATUALIZANDO OS…');
+  await persistOS(obj, isNew);
+  hideLoader();
+  showToast(isNew?'✓ OS CRIADA':'✓ OS ATUALIZADA');
+  closeOS();renderOS();
 }
 
 // ── SERVICES ──────────────────────────────────────────
@@ -1228,9 +1467,10 @@ function renderTempVehs(){
     </div>`).join('');
 }
 
-function saveCL(){
+async function saveCL(){
   const nm=document.getElementById('c-nm').value.trim();
   if(!nm){alert('Informe o nome!');return;}
+  const isNew=!editCLId;
   const obj={
     id:editCLId||uid(),
     nome:nm,
@@ -1242,10 +1482,20 @@ function saveCL(){
   };
   if(editCLId){const i=CL.findIndex(c=>c.id===editCLId);CL[i]=obj;}
   else CL.push(obj);
-  persist();closeCL();renderClients();
+  showLoader(isNew?'SALVANDO CLIENTE…':'ATUALIZANDO CLIENTE…');
+  await persistCL(obj, isNew);
+  hideLoader();
+  showToast(isNew?'✓ CLIENTE CADASTRADO':'✓ CLIENTE ATUALIZADO');
+  closeCL();renderClients();
 }
 
-function delCL(id){if(!confirm('Excluir cliente?'))return;CL=CL.filter(c=>c.id!==id);persist();renderClients();}
+async function delCL(id){
+  if(!confirm('Excluir cliente?'))return;
+  CL=CL.filter(c=>c.id!==id);
+  renderClients();
+  await deleteCL_db(id);
+  showToast('✓ CLIENTE EXCLUÍDO');
+}
 
 function renderClients(){
   const q=(document.getElementById('cq')?.value||'').toLowerCase();
@@ -1466,25 +1716,4 @@ function renderReport(){
   document.getElementById('rp-cli').textContent=CL.length;
   const sm={aguardando:'Aguardando',andamento:'Em Andamento',concluida:'Concluída',entregue:'Entregue'};
   const sc={aguardando:'var(--yellow)',andamento:'var(--blue)',concluida:'var(--green)',entregue:'var(--steel)'};
-  document.getElementById('rp-status').innerHTML=Object.entries(sm).map(([k,v])=>{
-    const n=OS.filter(o=>o.status===k).length;
-    return `<div style="background:var(--bg3);border:1px solid var(--line);border-top:2px solid ${sc[k]};padding:14px 16px">
-      <div style="font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--steel);margin-bottom:6px">${v}</div>
-      <div style="font-family:'Orbitron',monospace;font-size:26px;font-weight:700;color:${sc[k]}">${n}</div>
-    </div>`;
-  }).join('');
-  const sm2={};
-  OS.forEach(o=>(o.svcs||[]).forEach(s=>{sm2[s.desc]=(sm2[s.desc]||0)+1;}));
-  const sorted=Object.entries(sm2).sort((a,b)=>b[1]-a[1]).slice(0,8);
-  const rs=document.getElementById('rp-svcs');
-  if(!sorted.length){rs.innerHTML='<div style="color:var(--steel);font-family:\'Share Tech Mono\',monospace;font-size:10px">NENHUM SERVIÇO REGISTRADO</div>';return;}
-  const mx=sorted[0][1];
-  rs.innerHTML=sorted.map(([n,c])=>`<div class="bar-row"><div class="bar-lbl">${n}</div><div class="bar-track"><div class="bar-fill" style="width:${(c/mx*100).toFixed(0)}%"></div></div><div class="bar-count">${c}</div></div>`).join('');
-}
-
-// ── INIT ──────────────────────────────────────────────
-renderOS();
-updateStats();
-</script>
-</body>
-</html>
+  document.getElementById('rp-status').innerHTML=Obje
