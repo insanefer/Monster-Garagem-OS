@@ -239,143 +239,197 @@ input::placeholder,textarea::placeholder{color:var(--bg4)}
 .dev-row:last-child{margin-bottom:0}
 .cxa-item{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:rgba(196,64,64,.04);border:1px solid rgba(196,64,64,.15);margin-bottom:6px}
 
+/* BOTTOM NAV — escondido no desktop */
+.bottom-nav { display: none; }
+
 /* ══════════════════════════════
-   RESPONSIVO — MOBILE
+   RESPONSIVO — MOBILE (APP)
 ══════════════════════════════ */
 @media (max-width: 768px) {
 
-  body { font-size: 14px; }
+  body { font-size: 14px; padding-bottom: 80px; }
 
-  /* HEADER */
-  .header { padding: 0 16px; height: 56px; }
-  .logo-name { font-size: 16px; letter-spacing: 2px; }
-  .logo-mark { width: 32px; height: 32px; font-size: 15px; }
-  .logo-tagline { font-size: 7px; letter-spacing: 1px; }
+  /* esconde nav desktop, header vira compacto */
+  .nav { display: none; }
+
+  /* HEADER — compacto estilo app */
+  .header {
+    padding: 0 16px; height: 58px;
+    background-image: linear-gradient(180deg,#161a1d 0%,#0d0f10 100%);
+    border-bottom: 1px solid var(--accent2);
+  }
+  .logo-name { font-size: 17px; letter-spacing: 2px; }
+  .logo-mark { width: 34px; height: 34px; font-size: 16px; }
+  .logo-tagline { display: none; }
   .header-meta { display: none; }
-  .logo { gap: 10px; }
-
-  /* NAV */
-  .nav { padding: 0; overflow-x: auto; gap: 0; }
-  .nav::-webkit-scrollbar { display: none; }
-  .nav-tab { padding: 14px 14px; font-size: 11px; letter-spacing: 1px; white-space: nowrap; flex: 1; }
+  .logo { gap: 11px; }
 
   /* WRAP */
   .wrap { padding: 16px 14px; }
 
-  /* STATS */
+  /* TÍTULO DA PÁGINA (mobile) */
+  .mobile-page-title {
+    display: block;
+    font-family: 'Orbitron', monospace;
+    font-size: 15px; font-weight: 700;
+    letter-spacing: 2px; color: var(--chrome);
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--line2);
+  }
+
+  /* STATS — 2x2 com cara de app */
   .stats { grid-template-columns: 1fr 1fr !important; gap: 10px; margin-bottom: 18px; }
-  .stat { padding: 14px 16px; }
-  .stat-val { font-size: 26px; }
+  .stat {
+    padding: 16px;
+    background: linear-gradient(155deg, var(--bg3) 0%, var(--bg2) 100%);
+    border: 1px solid var(--line2);
+  }
+  .stat-val { font-size: 28px; }
   .stat-lbl { font-size: 9px; margin-bottom: 8px; }
 
   /* TOOLBAR */
-  .toolbar { flex-direction: column; align-items: stretch; gap: 10px; }
-  .filter-row { gap: 6px; overflow-x: auto; padding-bottom: 4px; }
+  .toolbar { flex-direction: column; align-items: stretch; gap: 12px; margin-bottom: 16px; }
+  .filter-row {
+    gap: 7px; overflow-x: auto; padding-bottom: 6px;
+    -webkit-overflow-scrolling: touch;
+  }
   .filter-row::-webkit-scrollbar { display: none; }
-  .pill { padding: 8px 14px; font-size: 11px; letter-spacing: 1px; white-space: nowrap; }
-  .right-tools { flex-direction: column; gap: 8px; }
-  .search-wrap { max-width: 100%; padding: 11px 14px; }
+  .pill {
+    padding: 9px 16px; font-size: 11px; letter-spacing: 1.5px;
+    white-space: nowrap; flex-shrink: 0;
+  }
+  .right-tools { flex-direction: column; gap: 0; }
+  .search-wrap {
+    max-width: 100%; padding: 13px 16px;
+    background: var(--bg3);
+  }
   .search-wrap input { font-size: 15px; }
-  .btn-steel { width: 100%; justify-content: center; padding: 13px; font-size: 14px; }
+  /* esconde o botão NOVA OS — usa o FAB */
+  .right-tools .btn-steel { display: none; }
 
-  /* TABLE — esconde só thead, tbody vira cards */
+  /* TABLE → CARDS */
   #page-os thead { display: none; }
-  #page-os .table-shell table { width: 100%; }
-  #page-os tbody tr { display: block; width: 100%; border-bottom: 1px solid var(--line); }
-  #page-os tbody tr:last-child { border-bottom: none; }
+  #page-os .table-shell {
+    background: transparent;
+    border: none;
+  }
+  #page-os table { width: 100%; }
+  #page-os tbody tr {
+    display: block; width: 100%;
+    margin-bottom: 12px;
+  }
 
-  /* OS CARDS no mobile */
+  /* OS CARD estilo app — angular metálico */
   .os-card-mobile {
     padding: 16px;
-    border-bottom: 1px solid var(--line);
+    background: linear-gradient(155deg, var(--bg3) 0%, var(--bg2) 100%);
+    border: 1px solid var(--line2);
+    border-left: 3px solid var(--accent2);
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 13px;
     cursor: pointer;
-    transition: background .15s;
+    transition: all .15s;
+    box-shadow: 0 2px 12px rgba(0,0,0,.4);
   }
-  .os-card-mobile:active { background: var(--bg3); }
-  .os-card-mobile:last-child { border-bottom: none; }
+  .os-card-mobile:active {
+    background: var(--bg4);
+    transform: scale(.98);
+  }
 
-  .os-card-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .os-card-top .os-num { font-size: 17px; }
+  .os-card-top { display: flex; justify-content: space-between; align-items: center; }
+  .os-card-top .os-num { font-size: 18px; }
 
   .os-card-bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 8px;
-    padding-top: 4px;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 8px;
+    padding-top: 12px;
     border-top: 1px solid var(--line);
   }
-
-  .os-card-cliente { font-size: 16px; }
+  .os-card-cliente { font-size: 17px; }
   .os-card-veiculo { font-size: 14px; }
 
-  /* MODAL */
+  /* card action buttons maiores */
+  .os-card-top .btn-sm { padding: 8px 12px; font-size: 13px; }
+  .os-card-top .btn-danger { padding: 8px 12px; font-size: 13px; }
+
+  /* MODAL — tela cheia deslizando de baixo */
   .overlay { padding: 0; align-items: flex-end; }
   .modal {
     max-width: 100% !important;
     margin: 0;
     border-left: none;
-    max-height: 94vh;
+    border-top: 3px solid var(--accent2);
+    max-height: 95vh;
     overflow-y: auto;
     transform: translateY(100%);
+    border-radius: 0;
   }
   .overlay.open .modal { transform: translateY(0); }
+  .modal-top {
+    padding: 18px 16px;
+    position: sticky; top: 0; z-index: 5;
+  }
   .modal-body { padding: 18px 16px; }
-  .modal-top { padding: 16px; }
   .modal-title { font-size: 15px; letter-spacing: 1px; }
-  .modal-foot { padding: 14px 16px; flex-wrap: wrap; gap: 8px; position: sticky; bottom: 0; }
-  .modal-foot .btn { flex: 1; justify-content: center; min-width: 90px; padding: 13px; font-size: 13px; }
+  .modal-foot {
+    padding: 14px 16px; flex-wrap: wrap; gap: 8px;
+    position: sticky; bottom: 0; z-index: 5;
+  }
+  .modal-foot .btn { flex: 1; justify-content: center; min-width: 90px; padding: 14px; font-size: 13px; }
+  .close-btn { width: 36px; height: 36px; font-size: 18px; }
 
   /* FORM */
   .fsec-title { font-size: 11px; }
   label { font-size: 10px; }
-  input, select, textarea { font-size: 16px; padding: 11px 12px; }
+  input, select, textarea { font-size: 16px; padding: 13px 14px; }
   .fgrid { gap: 14px; }
   .g2, .g3, .g4 { grid-template-columns: 1fr !important; }
   .sp2, .sp3, .sp4 { grid-column: span 1 !important; }
 
   /* SERVIÇOS */
   .svc-shell { overflow-x: auto; }
-  .svc-add { flex-wrap: wrap; }
-  .svc-add input, .svc-add select { min-width: calc(50% - 4px); font-size: 14px; }
-  .svc-add .btn { width: 100%; }
+  .svc-add { flex-wrap: wrap; gap: 8px; }
+  .svc-add input, .svc-add select { min-width: calc(50% - 4px); font-size: 15px; padding: 11px; }
+  .svc-add .btn { width: 100%; padding: 12px; }
 
   /* TOTALS */
-  .totals-bar { flex-direction: column; align-items: flex-start; gap: 8px; }
-  .totals-breakdown { font-size: 11px; line-height: 2.2; }
-  .grand-total { font-size: 20px; }
+  .totals-bar { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .totals-breakdown { font-size: 11px; line-height: 2.4; }
+  .grand-total { font-size: 22px; }
 
   /* PAGAMENTOS */
-  #pag-list .pag-row, .pag-row { flex-wrap: wrap; gap: 6px; padding: 10px; }
+  #pag-list .pag-row, .pag-row { flex-wrap: wrap; gap: 6px; padding: 12px; }
   .pag-forma { min-width: unset; font-size: 10px; }
-  .pag-val { font-size: 15px; }
+  .pag-val { font-size: 16px; }
 
   /* FINANCEIRO */
   .fin-grid { grid-template-columns: 1fr 1fr !important; gap: 10px; }
   #fin-cards2 { grid-template-columns: 1fr !important; }
-  .fin-card { padding: 14px; }
-  .fin-card-val { font-size: 18px; }
+  .fin-card {
+    padding: 16px;
+    background: linear-gradient(155deg, var(--bg3) 0%, var(--bg2) 100%);
+  }
+  .fin-card-val { font-size: 19px; }
   .fin-section { padding: 16px; }
-  .fin-filter { flex-direction: column; align-items: stretch; }
-  .fin-filter select { width: 100%; font-size: 15px; padding: 11px; }
-  .month-bar { height: 100px; }
+  .fin-filter { flex-direction: column; align-items: stretch; gap: 8px; }
+  .fin-filter select { width: 100%; font-size: 15px; padding: 13px; }
+  .month-bar { height: 110px; }
 
   /* CLIENTES */
-  .client-card { padding: 16px; }
+  .client-card {
+    padding: 16px;
+    background: linear-gradient(155deg, var(--bg3) 0%, var(--bg2) 100%);
+    border: 1px solid var(--line2);
+    border-left: 3px solid var(--accent2);
+  }
   .client-card-top { flex-wrap: wrap; gap: 12px; }
-  .c-name { font-size: 16px; }
+  .c-name { font-size: 17px; }
   .c-meta { font-size: 12px; }
   .c-stats { margin-right: 0; }
-  .acts { flex-wrap: wrap; gap: 6px; width: 100%; }
-  .acts .btn { flex: 1; font-size: 11px; padding: 9px 10px; justify-content: center; }
+  .acts { flex-wrap: wrap; gap: 8px; width: 100%; margin-top: 4px; }
+  .acts .btn { flex: 1; font-size: 12px; padding: 11px 10px; justify-content: center; }
 
   /* RELATÓRIO */
   #rp-status { grid-template-columns: 1fr 1fr !important; }
@@ -387,11 +441,72 @@ input::placeholder,textarea::placeholder{color:var(--bg4)}
   /* BADGES */
   .badge { font-size: 10px; padding: 4px 9px; }
   .plate { font-size: 12px; letter-spacing: 2px; padding: 3px 8px; }
+
+  /* ═══════ BOTTOM NAV (APP) ═══════ */
+  .bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    height: 68px;
+    background: linear-gradient(180deg, #14181b 0%, #0a0c0d 100%);
+    border-top: 1px solid var(--accent2);
+    z-index: 150;
+    align-items: center;
+    justify-content: space-around;
+    box-shadow: 0 -4px 24px rgba(0,0,0,.6);
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+  .bn-item {
+    flex: 1;
+    background: none; border: none;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 4px;
+    color: var(--steel);
+    cursor: pointer;
+    padding: 8px 0;
+    transition: color .15s;
+    position: relative;
+  }
+  .bn-item .bn-ico { font-size: 20px; line-height: 1; }
+  .bn-item .bn-lbl {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase;
+  }
+  .bn-item.active { color: var(--chrome); }
+  .bn-item.active::before {
+    content: '';
+    position: absolute; top: 0; left: 20%; right: 20%;
+    height: 2px; background: var(--chrome);
+  }
+
+  /* FAB central — botão + */
+  .bn-fab {
+    flex-shrink: 0;
+    width: 58px; height: 58px;
+    margin-top: -24px;
+    background: linear-gradient(155deg, #454d54 0%, #2a3036 100%);
+    border: 1px solid var(--chrome);
+    color: var(--white);
+    font-size: 30px; font-weight: 300;
+    cursor: pointer;
+    clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 24px rgba(168,184,200,.3);
+    transition: transform .15s;
+    line-height: 1;
+    padding-bottom: 4px;
+  }
+  .bn-fab:active { transform: scale(.9); }
 }
+
+.mobile-page-title { display: none; }
 
 @media (max-width: 400px) {
   .stats { grid-template-columns: 1fr 1fr !important; }
   .fin-grid { grid-template-columns: 1fr !important; }
+  .bn-item .bn-lbl { font-size: 9px; }
 }
 </style>
 </head>
@@ -418,10 +533,29 @@ input::placeholder,textarea::placeholder{color:var(--bg4)}
   <button class="nav-tab" onclick="goPage('rp',this)">▦&nbsp; Relatório</button>
 </nav>
 
+<!-- BOTTOM NAV (MOBILE) -->
+<nav class="bottom-nav" id="bottom-nav">
+  <button class="bn-item active" data-page="os" onclick="goPageMobile('os',this)">
+    <span class="bn-ico">⚙</span><span class="bn-lbl">Ordens</span>
+  </button>
+  <button class="bn-item" data-page="cl" onclick="goPageMobile('cl',this)">
+    <span class="bn-ico">◈</span><span class="bn-lbl">Clientes</span>
+  </button>
+  <button class="bn-fab" onclick="openOS()">+</button>
+  <button class="bn-item" data-page="fin" onclick="goPageMobile('fin',this)">
+    <span class="bn-ico">◎</span><span class="bn-lbl">Financeiro</span>
+  </button>
+  <button class="bn-item" data-page="rp" onclick="goPageMobile('rp',this)">
+    <span class="bn-ico">▦</span><span class="bn-lbl">Relatório</span>
+  </button>
+</nav>
+
+
 <div class="wrap">
 
   <!-- PAGE OS -->
   <div class="page active" id="page-os">
+    <div class="mobile-page-title">⚙ Ordens de Serviço</div>
     <div class="stats">
       <div class="stat"><div class="stat-bar s1"></div><div class="stat-lbl">Aguardando</div><div class="stat-val col-y" id="sv-wait">0</div></div>
       <div class="stat"><div class="stat-bar s2"></div><div class="stat-lbl">Em Andamento</div><div class="stat-val col-b" id="sv-prog">0</div></div>
@@ -455,6 +589,7 @@ input::placeholder,textarea::placeholder{color:var(--bg4)}
 
   <!-- PAGE CLIENTES -->
   <div class="page" id="page-cl">
+    <div class="mobile-page-title">◈ Clientes</div>
     <div class="toolbar">
       <div class="search-wrap"><span style="color:var(--bg4)">◎</span><input id="cq" type="text" placeholder="Buscar cliente…" oninput="renderClients()"></div>
       <button class="btn btn-steel" onclick="openCL()">＋ Novo Cliente</button>
@@ -465,6 +600,7 @@ input::placeholder,textarea::placeholder{color:var(--bg4)}
 
   <!-- PAGE FINANCEIRO -->
   <div class="page" id="page-fin">
+    <div class="mobile-page-title">◎ Financeiro</div>
     <div class="fin-filter">
       <select id="fin-mes" onchange="renderFin()">
         <option value="0">Todos os meses</option>
@@ -526,6 +662,7 @@ input::placeholder,textarea::placeholder{color:var(--bg4)}
 
   <!-- PAGE RELATORIO -->
   <div class="page" id="page-rp">
+    <div class="mobile-page-title">▦ Relatório</div>
     <div class="stats" style="grid-template-columns:repeat(3,1fr);margin-bottom:22px">
       <div class="stat"><div class="stat-bar s4"></div><div class="stat-lbl">Total de OS</div><div class="stat-val" id="rp-tot">0</div></div>
       <div class="stat"><div class="stat-bar s3"></div><div class="stat-lbl">Faturamento Geral</div><div class="stat-val col-g" id="rp-fat">R$0</div></div>
@@ -1052,10 +1189,35 @@ function goPage(id,el){
   document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
   document.getElementById('page-'+id).classList.add('active');
   el.classList.add('active');
+  syncBottomNav(id);
   if(id==='cl') renderClients();
   if(id==='fin') renderFin();
   if(id==='rp') renderReport();
   updateStats();
+  window.scrollTo(0,0);
+}
+
+function goPageMobile(id,el){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.bn-item').forEach(t=>t.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  if(el) el.classList.add('active');
+  // sincroniza nav desktop
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  const map={os:0,cl:1,fin:2,rp:3};
+  const tabs=document.querySelectorAll('.nav-tab');
+  if(tabs[map[id]]) tabs[map[id]].classList.add('active');
+  if(id==='cl') renderClients();
+  if(id==='fin') renderFin();
+  if(id==='rp') renderReport();
+  updateStats();
+  window.scrollTo(0,0);
+}
+
+function syncBottomNav(id){
+  document.querySelectorAll('.bn-item').forEach(t=>{
+    t.classList.toggle('active', t.dataset.page===id);
+  });
 }
 
 // ── STATS ──────────────────────────────────────────────
