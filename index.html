@@ -238,6 +238,141 @@ input::placeholder,textarea::placeholder{color:var(--bg4)}
 .dev-row{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:rgba(196,64,64,.04);border:1px solid rgba(196,64,64,.15);margin-bottom:6px}
 .dev-row:last-child{margin-bottom:0}
 .cxa-item{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:rgba(196,64,64,.04);border:1px solid rgba(196,64,64,.15);margin-bottom:6px}
+
+/* ══════════════════════════════
+   RESPONSIVO — MOBILE
+══════════════════════════════ */
+@media (max-width: 768px) {
+
+  /* HEADER */
+  .header { padding: 0 14px; height: 52px; }
+  .logo-name { font-size: 14px; letter-spacing: 2px; }
+  .logo-mark { width: 30px; height: 30px; font-size: 14px; }
+  .logo-tagline { font-size: 7px; letter-spacing: 1px; }
+  .header-meta { font-size: 8px; letter-spacing: 0; }
+  .logo { gap: 8px; }
+
+  /* NAV */
+  .nav { padding: 0 4px; overflow-x: auto; gap: 0; }
+  .nav::-webkit-scrollbar { display: none; }
+  .nav-tab { padding: 10px 10px; font-size: 9px; letter-spacing: 1px; white-space: nowrap; }
+
+  /* WRAP */
+  .wrap { padding: 12px 12px; }
+
+  /* STATS */
+  .stats { grid-template-columns: 1fr 1fr !important; gap: 8px; margin-bottom: 14px; }
+  .stat { padding: 10px 12px; }
+  .stat-val { font-size: 22px; }
+  .stat-lbl { font-size: 8px; }
+
+  /* TOOLBAR */
+  .toolbar { flex-direction: column; align-items: stretch; gap: 8px; }
+  .filter-row { gap: 4px; }
+  .pill { padding: 5px 10px; font-size: 9px; letter-spacing: 1px; }
+  .right-tools { flex-direction: column; gap: 6px; }
+  .search-wrap { max-width: 100%; }
+  .btn-steel { width: 100%; justify-content: center; }
+
+  /* TABLE — vira cards no mobile */
+  .table-shell { overflow: hidden; }
+  table { display: none; }
+  #os-body { display: block; }
+
+  /* OS CARDS no mobile */
+  .os-card-mobile {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .os-card-mobile:last-child { border-bottom: none; }
+
+  .os-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .os-card-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  /* MODAL */
+  .overlay { padding: 0; align-items: flex-end; }
+  .modal {
+    max-width: 100% !important;
+    margin: 0;
+    border-radius: 0;
+    border-left: none;
+    max-height: 92vh;
+    overflow-y: auto;
+    transform: translateY(100%);
+  }
+  .overlay.open .modal { transform: translateY(0); }
+  .modal-body { padding: 16px; }
+  .modal-top { padding: 14px 16px; }
+  .modal-title { font-size: 13px; letter-spacing: 1px; }
+  .modal-foot { padding: 12px 16px; flex-wrap: wrap; gap: 8px; }
+  .modal-foot .btn { flex: 1; justify-content: center; min-width: 80px; }
+
+  /* FORM GRIDS */
+  .g2, .g3, .g4 { grid-template-columns: 1fr !important; }
+  .sp2, .sp3, .sp4 { grid-column: span 1 !important; }
+
+  /* SERVIÇOS TABLE */
+  .svc-shell table { display: table; }
+  .svc-shell th:nth-child(2),
+  .svc-shell td:nth-child(2),
+  .svc-shell th:nth-child(3),
+  .svc-shell td:nth-child(3) { display: none; }
+  .svc-add { flex-wrap: wrap; }
+  .svc-add input, .svc-add select { min-width: calc(50% - 4px); }
+
+  /* TOTALS BAR */
+  .totals-bar { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .totals-breakdown { font-size: 10px; line-height: 2; }
+  .grand-total { font-size: 18px; }
+
+  /* FINANCEIRO */
+  .fin-grid { grid-template-columns: 1fr 1fr !important; }
+  #fin-cards2 { grid-template-columns: 1fr !important; }
+
+  /* FIN SECTION */
+  .fin-section { padding: 14px; }
+  div[style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; display: grid; }
+
+  /* CLIENTES */
+  .client-card-top { flex-wrap: wrap; gap: 10px; }
+  .c-stats { display: none; }
+  .acts { flex-wrap: wrap; gap: 4px; }
+  .acts .btn { font-size: 10px; padding: 5px 10px; }
+
+  /* PAGAMENTOS */
+  .pag-row { flex-wrap: wrap; gap: 4px; }
+  .pag-forma { min-width: unset; font-size: 9px; }
+
+  /* RELATÓRIO */
+  #rp-status { grid-template-columns: 1fr 1fr !important; }
+
+  /* BADGES */
+  .badge { font-size: 9px; padding: 2px 7px; }
+
+  /* PLATE */
+  .plate { font-size: 10px; letter-spacing: 1px; padding: 2px 5px; }
+}
+
+@media (max-width: 400px) {
+  .stats { grid-template-columns: 1fr 1fr !important; }
+  .fin-grid { grid-template-columns: 1fr !important; }
+  .nav-tab { padding: 10px 8px; font-size: 8px; }
+}
 </style>
 </head>
 <body>
@@ -925,23 +1060,56 @@ function renderOS(){
   const em=document.getElementById('os-empty');
   if(!data.length){tb.innerHTML='';em.style.display='block';return;}
   em.style.display='none';
-  tb.innerHTML=data.map(o=>`
-    <tr>
-      <td><span class="os-num">#${o.num}</span></td>
-      <td><span class="entrada-tag">${isoToBR(o.entrada)}</span></td>
-      <td><strong style="color:var(--white)">${o.cliente||'—'}</strong><br><small style="color:var(--steel)">${o.telefone||''}</small></td>
-      <td style="color:var(--chrome);font-size:12px">${o.modelo||'—'}</td>
-      <td><span class="plate">${o.placa||'—'}</span></td>
-      <td>${badge(o.status)}</td>
-      <td>${pagBadge(o)}</td>
-      <td>${o.nfNum?`<span class="badge badge-nf">✓ NF ${o.nfNum}</span>`:`<span class="badge badge-nf-p">⚠ Pendente</span>`}</td>
-      <td style="font-family:'Orbitron',monospace;font-size:13px;color:var(--chrome)">R$ ${fmt(o.total)}</td>
-      <td><div class="acts">
-        <button class="btn btn-ghost btn-sm" onclick="viewOS('${o.id}')">◉</button>
-        <button class="btn btn-ghost btn-sm" onclick="editOS('${o.id}')">✎</button>
-        <button class="btn btn-danger" onclick="delOS('${o.id}')">✕</button>
-      </div></td>
-    </tr>`).join('');
+  const isMobile=window.innerWidth<=768;
+  if(isMobile){
+    tb.innerHTML=data.map(o=>`
+      <div class="os-card-mobile">
+        <div class="os-card-top">
+          <div>
+            <span class="os-num">#${o.num}</span>
+            <span class="entrada-tag" style="margin-left:8px">${isoToBR(o.entrada)}</span>
+          </div>
+          <div style="display:flex;gap:4px">
+            <button class="btn btn-ghost btn-sm" onclick="viewOS('${o.id}')">◉</button>
+            <button class="btn btn-ghost btn-sm" onclick="editOS('${o.id}')">✎</button>
+            <button class="btn btn-danger" onclick="delOS('${o.id}')">✕</button>
+          </div>
+        </div>
+        <div>
+          <strong style="color:var(--white);font-size:14px">${o.cliente||'—'}</strong>
+          ${o.telefone?`<span style="color:var(--steel);font-size:11px;margin-left:8px">${o.telefone}</span>`:''}
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+          <span style="color:var(--chrome);font-size:13px">${o.modelo||'—'}</span>
+          <span class="plate">${o.placa||'—'}</span>
+        </div>
+        <div class="os-card-bottom">
+          <div style="display:flex;gap:6px;flex-wrap:wrap">
+            ${badge(o.status)}
+            ${pagBadge(o)}
+          </div>
+          <strong style="font-family:'Orbitron',monospace;font-size:14px;color:var(--chrome)">R$ ${fmt(o.total)}</strong>
+        </div>
+      </div>`).join('');
+  } else {
+    tb.innerHTML=data.map(o=>`
+      <tr>
+        <td><span class="os-num">#${o.num}</span></td>
+        <td><span class="entrada-tag">${isoToBR(o.entrada)}</span></td>
+        <td><strong style="color:var(--white)">${o.cliente||'—'}</strong><br><small style="color:var(--steel)">${o.telefone||''}</small></td>
+        <td style="color:var(--chrome);font-size:12px">${o.modelo||'—'}</td>
+        <td><span class="plate">${o.placa||'—'}</span></td>
+        <td>${badge(o.status)}</td>
+        <td>${pagBadge(o)}</td>
+        <td>${o.nfNum?`<span class="badge badge-nf">✓ NF ${o.nfNum}</span>`:`<span class="badge badge-nf-p">⚠ Pendente</span>`}</td>
+        <td style="font-family:'Orbitron',monospace;font-size:13px;color:var(--chrome)">R$ ${fmt(o.total)}</td>
+        <td><div class="acts">
+          <button class="btn btn-ghost btn-sm" onclick="viewOS('${o.id}')">◉</button>
+          <button class="btn btn-ghost btn-sm" onclick="editOS('${o.id}')">✎</button>
+          <button class="btn btn-danger" onclick="delOS('${o.id}')">✕</button>
+        </div></td>
+      </tr>`).join('');
+  }
   updateStats();
 }
 
@@ -1740,6 +1908,13 @@ function renderReport(){
 }
 
 // ── INIT ──────────────────────────────────────────────
+// Mostra/esconde cabeçalho da tabela no mobile
+function checkTableHeader(){
+  const thead = document.querySelector('#page-os thead');
+  if(thead) thead.style.display = window.innerWidth<=768 ? 'none' : '';
+}
+window.addEventListener('resize', ()=>{ renderOS(); checkTableHeader(); });
+checkTableHeader();
 loadAll();
 </script>
 </body>
