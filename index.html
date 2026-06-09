@@ -680,27 +680,37 @@ function showToast(msg, ok=true){
 
 // ── LOAD DATA ──────────────────────────────────────────
 async function loadAll(){
-  showLoader('CONECTANDO AO BANCO…');
+  // Carrega local imediatamente para não travar a UI
+  OS = JSON.parse(localStorage.getItem('mg3_os')||'[]');
+  CL = JSON.parse(localStorage.getItem('mg3_cl')||'[]');
+  renderOS();
+  updateStats();
+
+  // Tenta conectar Supabase em background
   try {
-    // Migrar localStorage se existir
-    const oldOS = JSON.parse(localStorage.getItem('mg3_os')||'[]');
-    const oldCL = JSON.parse(localStorage.getItem('mg3_cl')||'[]');
+    showLoader('CONECTANDO AO BANCO…');
+    const ctrl = new AbortController();
+    const timeout = setTimeout(()=>ctrl.abort(), 8000);
 
     const [osData, clData] = await Promise.all([
-      sbGet('ordens','order=created_at.asc'),
-      sbGet('clientes','order=created_at.asc')
+      fetch(`${SB_URL}/rest/v1/ordens?order=created_at.asc`, {headers:sbHeaders, signal:ctrl.signal}).then(r=>{if(!r.ok)throw new Error(r.status);return r.json();}),
+      fetch(`${SB_URL}/rest/v1/clientes?order=created_at.asc`, {headers:sbHeaders, signal:ctrl.signal}).then(r=>{if(!r.ok)throw new Error(r.status);return r.json();})
     ]);
+    clearTimeout(timeout);
+
+    const oldOS = JSON.parse(localStorage.getItem('mg3_os')||'[]');
+    const oldCL = JSON.parse(localStorage.getItem('mg3_cl')||'[]');
 
     OS = osData.map(mapFromDB_OS);
     CL = clData.map(mapFromDB_CL);
 
-    // Migrar dados do localStorage se banco vazio e local tem dados
+    // Migrar localStorage → Supabase se banco vazio
     if(OS.length===0 && oldOS.length>0){
       showLoader('MIGRANDO DADOS LOCAIS…');
       for(const o of oldOS){ try{ await sbInsert('ordens', mapToDB_OS(o)); }catch(e){console.warn('migrate OS',e);} }
       OS = oldOS;
       localStorage.removeItem('mg3_os');
-      showToast('✓ DADOS LOCAIS MIGRADOS COM SUCESSO');
+      showToast('✓ DADOS MIGRADOS PARA A NUVEM');
     }
     if(CL.length===0 && oldCL.length>0){
       for(const c of oldCL){ try{ await sbInsert('clientes', mapToDB_CL(c)); }catch(e){console.warn('migrate CL',e);} }
@@ -711,15 +721,13 @@ async function loadAll(){
     hideLoader();
     renderOS();
     updateStats();
+    showToast('✓ CONECTADO AO BANCO');
+
   } catch(e){
     hideLoader();
-    console.error(e);
-    // Fallback para localStorage se Supabase falhar
-    OS = JSON.parse(localStorage.getItem('mg3_os')||'[]');
-    CL = JSON.parse(localStorage.getItem('mg3_cl')||'[]');
-    showToast('⚠ MODO OFFLINE — DADOS LOCAIS', false);
-    renderOS();
-    updateStats();
+    console.warn('Supabase offline, usando dados locais:', e.message);
+    // UI já está carregada com dados locais — não trava nada
+    if(e.name!=='AbortError') showToast('⚠ MODO OFFLINE', false);
   }
 }
 
@@ -1710,10 +1718,4 @@ function renderFin(){
 }
 
 // ── REPORT ────────────────────────────────────────────
-function renderReport(){
-  document.getElementById('rp-tot').textContent=OS.length;
-  document.getElementById('rp-fat').textContent='R$'+fmt(OS.reduce((s,o)=>s+(parseFloat(o.total)||0),0));
-  document.getElementById('rp-cli').textContent=CL.length;
-  const sm={aguardando:'Aguardando',andamento:'Em Andamento',concluida:'Concluída',entregue:'Entregue'};
-  const sc={aguardando:'var(--yellow)',andamento:'var(--blue)',concluida:'var(--green)',entregue:'var(--steel)'};
-  document.getElementById('rp-status').innerHTML=Obje
+function renderR
