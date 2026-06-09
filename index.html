@@ -615,33 +615,43 @@ const sbHeaders = {
   'Prefer': 'return=representation'
 };
 
-async function sbGet(table, params=''){
-  const r = await fetch(`${SB_URL}/rest/v1/${table}?${params}`, {headers: sbHeaders});
-  if(!r.ok) throw new Error(`GET ${table} failed: ${r.status}`);
+async function sbFetch(path, opts={}){
+  const r = await fetch(`${SB_URL}${path}`, {
+    ...opts,
+    headers: {...sbHeaders, ...(opts.headers||{})}
+  });
+  if(!r.ok){
+    const txt = await r.text();
+    throw new Error(`${opts.method||'GET'} ${path} → ${r.status}: ${txt}`);
+  }
+  // 204 No Content (DELETE)
+  if(r.status===204) return null;
   return r.json();
+}
+
+async function sbGet(table, params=''){
+  return sbFetch(`/rest/v1/${table}?${params}`);
 }
 
 async function sbInsert(table, data){
-  const r = await fetch(`${SB_URL}/rest/v1/${table}`, {
-    method:'POST', headers: sbHeaders, body: JSON.stringify(data)
+  return sbFetch(`/rest/v1/${table}`, {
+    method:'POST', body: JSON.stringify(data)
   });
-  if(!r.ok){ const e=await r.text(); throw new Error(`INSERT ${table}: ${e}`); }
-  return r.json();
 }
 
 async function sbUpdate(table, id, data){
-  const r = await fetch(`${SB_URL}/rest/v1/${table}?id=eq.${id}`, {
-    method:'PATCH', headers: sbHeaders, body: JSON.stringify(data)
+  return sbFetch(`/rest/v1/${table}?id=eq.${encodeURIComponent(id)}`, {
+    method:'PATCH',
+    headers:{'Prefer':'return=minimal'},
+    body: JSON.stringify(data)
   });
-  if(!r.ok){ const e=await r.text(); throw new Error(`UPDATE ${table}: ${e}`); }
-  return r.json();
 }
 
 async function sbDelete(table, id){
-  const r = await fetch(`${SB_URL}/rest/v1/${table}?id=eq.${id}`, {
-    method:'DELETE', headers: sbHeaders
+  return sbFetch(`/rest/v1/${table}?id=eq.${encodeURIComponent(id)}`, {
+    method:'DELETE',
+    headers:{'Prefer':'return=minimal'}
   });
-  if(!r.ok) throw new Error(`DELETE ${table} failed`);
 }
 
 // ── STATE ──────────────────────────────────────────────
@@ -680,22 +690,20 @@ function showToast(msg, ok=true){
 
 // ── LOAD DATA ──────────────────────────────────────────
 async function loadAll(){
-  // Carrega local imediatamente para não travar a UI
+  // Carrega local imediatamente — UI funciona na hora
   OS = JSON.parse(localStorage.getItem('mg3_os')||'[]');
   CL = JSON.parse(localStorage.getItem('mg3_cl')||'[]');
   renderOS();
   updateStats();
 
-  // Tenta conectar Supabase em background — SEM loader de tela cheia
+  // Conecta Supabase em background sem travar nada
   try {
-    const ctrl = new AbortController();
-    const timeout = setTimeout(()=>ctrl.abort(), 8000);
-
-    const [osData, clData] = await Promise.all([
-      fetch(`${SB_URL}/rest/v1/ordens?order=created_at.asc`, {headers:sbHeaders, signal:ctrl.signal}).then(r=>{if(!r.ok)throw new Error(r.status);return r.json();}),
-      fetch(`${SB_URL}/rest/v1/clientes?order=created_at.asc`, {headers:sbHeaders, signal:ctrl.signal}).then(r=>{if(!r.ok)throw new Error(r.status);return r.json();})
+    const timeout = new Promise((_,rej)=>setTimeout(()=>rej(new Error('timeout')),8000));
+    const load = Promise.all([
+      sbGet('ordens','order=created_at.asc'),
+      sbGet('clientes','order=created_at.asc')
     ]);
-    clearTimeout(timeout);
+    const [osData, clData] = await Promise.race([load, timeout.then(()=>{throw new Error('timeout');})]);
 
     const oldOS = JSON.parse(localStorage.getItem('mg3_os')||'[]');
     const oldCL = JSON.parse(localStorage.getItem('mg3_cl')||'[]');
@@ -703,6 +711,7 @@ async function loadAll(){
     OS = osData.map(mapFromDB_OS);
     CL = clData.map(mapFromDB_CL);
 
+    // Migrar dados locais para o Supabase se banco estiver vazio
     if(OS.length===0 && oldOS.length>0){
       for(const o of oldOS){ try{ await sbInsert('ordens', mapToDB_OS(o)); }catch(e){console.warn('migrate OS',e);} }
       OS = oldOS;
@@ -720,8 +729,8 @@ async function loadAll(){
     showToast('✓ CONECTADO AO BANCO');
 
   } catch(e){
-    console.warn('Supabase offline, usando dados locais:', e.message);
-    if(e.name!=='AbortError') showToast('⚠ MODO OFFLINE — DADOS LOCAIS', false);
+    console.warn('Supabase indisponível, usando dados locais:', e.message);
+    showToast('⚠ MODO OFFLINE', false);
   }
 }
 
