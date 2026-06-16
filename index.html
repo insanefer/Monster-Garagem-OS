@@ -557,7 +557,7 @@ input::placeholder,textarea::placeholder{color:var(--steel);opacity:.55}
   <div class="page active" id="page-os">
     <div class="mobile-page-title">⚙ Ordens de Serviço</div>
     <div class="stats">
-      <div class="stat"><div class="stat-bar s1"></div><div class="stat-lbl">Aguardando</div><div class="stat-val col-y" id="sv-wait">0</div></div>
+      <div class="stat"><div class="stat-bar s1"></div><div class="stat-lbl">Orçamentos / Aguardando</div><div class="stat-val col-y" id="sv-wait">0</div></div>
       <div class="stat"><div class="stat-bar s2"></div><div class="stat-lbl">Em Andamento</div><div class="stat-val col-b" id="sv-prog">0</div></div>
       <div class="stat"><div class="stat-bar s3"></div><div class="stat-lbl">Concluídas</div><div class="stat-val col-g" id="sv-done">0</div></div>
       <div class="stat"><div class="stat-bar s4"></div><div class="stat-lbl">Faturamento Mês</div><div class="stat-val" id="sv-rev">R$0</div></div>
@@ -565,7 +565,7 @@ input::placeholder,textarea::placeholder{color:var(--steel);opacity:.55}
     <div class="toolbar">
       <div class="filter-row">
         <button class="pill active" onclick="setFilter('all',this)">Todas</button>
-        <button class="pill" onclick="setFilter('aguardando',this)">Aguardando</button>
+        <button class="pill" onclick="setFilter('aguardando',this)">Orçamentos</button>
         <button class="pill" onclick="setFilter('andamento',this)">Andamento</button>
         <button class="pill" onclick="setFilter('concluida',this)">Concluídas</button>
         <button class="pill" onclick="setFilter('entregue',this)">Entregues</button>
@@ -817,7 +817,7 @@ input::placeholder,textarea::placeholder{color:var(--steel);opacity:.55}
         <div class="fgrid g2">
           <div class="fg"><label>Status</label>
             <select id="f-sts">
-              <option value="aguardando">Aguardando Aprovação</option>
+              <option value="aguardando">Orçamento / Aguardando Aprovação</option>
               <option value="andamento">Em Andamento</option>
               <option value="concluida">Concluída</option>
               <option value="entregue">Entregue</option>
@@ -830,6 +830,7 @@ input::placeholder,textarea::placeholder{color:var(--steel);opacity:.55}
     </div>
     <div class="modal-foot">
       <button class="btn btn-ghost" onclick="closeOS()">Cancelar</button>
+      <button class="btn btn-metal" id="btn-orca" style="display:none" onclick="doPrintOrca()">📋 Orçamento</button>
       <button class="btn btn-metal" id="btn-print" style="display:none" onclick="doPrint()">⎙ Imprimir OS</button>
       <button class="btn btn-steel" onclick="saveOS()">◼ Salvar OS</button>
     </div>
@@ -890,7 +891,8 @@ input::placeholder,textarea::placeholder{color:var(--steel);opacity:.55}
     <div class="modal-body" id="vw-body"></div>
     <div class="modal-foot">
       <button class="btn btn-ghost" onclick="closeView()">Fechar</button>
-      <button class="btn btn-metal" onclick="printView()">⎙ Imprimir</button>
+      <button class="btn btn-metal" onclick="printViewOrca()">📋 Orçamento</button>
+      <button class="btn btn-metal" onclick="printView()">⎙ OS</button>
       <button class="btn btn-steel" id="vw-edit">✎ Editar</button>
     </div>
   </div>
@@ -1378,6 +1380,7 @@ function openOS(){
   document.getElementById('m-os-title').textContent='NOVA ORDEM DE SERVIÇO';
   document.getElementById('m-os-sub').textContent='OS #'+nextNum()+' — MONSTER GARAGE';
   document.getElementById('btn-print').style.display='none';
+  document.getElementById('btn-orca').style.display='none';
   clearOSForm();renderSvcs();renderChk();renderPag();renderCaixa();
   document.getElementById('m-os').classList.add('open');
 }
@@ -1406,6 +1409,7 @@ function editOS(id){
   document.getElementById('m-os-title').textContent='EDITAR OS #'+o.num;
   document.getElementById('m-os-sub').textContent='MONSTER GARAGE';
   document.getElementById('btn-print').style.display='inline-flex';
+  document.getElementById('btn-orca').style.display='inline-flex';
   document.getElementById('f-cli').value=o.cliente||'';
   document.getElementById('f-tel').value=o.telefone||'';
   document.getElementById('f-mod').value=o.modelo||'';
@@ -1721,7 +1725,66 @@ function viewOS(id){
 
 function closeView(){document.getElementById('m-view').classList.remove('open');}
 function printView(){const o=OS.find(x=>x.id===viewId);if(o)printOS(o);}
+function printViewOrca(){const o=OS.find(x=>x.id===viewId);if(o)printOrca(o);}
 function doPrint(){if(eid){const o=OS.find(x=>x.id===eid);if(o)printOS(o);}}
+function doPrintOrca(){if(eid){const o=OS.find(x=>x.id===eid);if(o)printOrca(o);}}
+
+function printOrca(o){
+  const tpT={sta:0,pca:0,ret:0,out:0};
+  (o.svcs||[]).forEach(s=>{tpT[s.tp]=(tpT[s.tp]||0)+s.total;});
+  // validade: 7 dias a partir de hoje
+  const val=new Date();val.setDate(val.getDate()+7);
+  const validade=val.toLocaleDateString('pt-BR');
+  const w=window.open('','_blank');
+  w.document.write(`<!DOCTYPE html><html><head><title>Orçamento #${o.num}</title>
+  <style>
+    body{font-family:Arial,sans-serif;font-size:12px;color:#111;max-width:800px;margin:0 auto;padding:20px}
+    h2{margin:0;font-size:22px;font-weight:900;letter-spacing:3px}
+    .sub{font-size:10px;color:#666;letter-spacing:2px;text-transform:uppercase}
+    .hdr{display:flex;justify-content:space-between;border-bottom:3px solid #111;padding-bottom:12px;margin-bottom:16px}
+    .doc-title{font-size:26px;font-weight:900;letter-spacing:2px;color:#444}
+    table{width:100%;border-collapse:collapse;margin:8px 0}
+    th,td{border:1px solid #ccc;padding:7px 10px;text-align:left;font-size:11px}
+    th{background:#f0f0f0;font-weight:700;text-transform:uppercase;letter-spacing:1px}
+    .tot-row td{font-weight:700;background:#f9f9f9}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+    .box{border:1px solid #ccc;padding:9px 12px}
+    .lbl{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#888;margin-bottom:4px}
+    .plate{font-weight:700;letter-spacing:3px;border:2px solid #111;padding:2px 6px;display:inline-block}
+    .validade{background:#fff8e8;border:1px solid #e0c060;padding:10px 14px;margin:14px 0;font-size:12px}
+    .aprovacao{margin-top:30px;border:1px dashed #999;padding:16px;text-align:center;font-size:12px;color:#555}
+    .sig{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:50px}
+    .sig-line{border-top:1px solid #111;padding-top:5px;text-align:center;font-size:10px;color:#666}
+    @media print{body{padding:0}}
+  </style></head><body>
+  <div class="hdr">
+    <div><h2>⚙ MONSTER GARAGE</h2><div class="sub">Victor Tomaz Santos Oliveira</div></div>
+    <div style="text-align:right"><div class="doc-title">ORÇAMENTO</div><div class="sub">Nº ${o.num} — ${todayBR()}</div></div>
+  </div>
+  <div class="grid2">
+    <div class="box"><div class="lbl">Cliente</div><strong>${o.cliente}</strong>${o.telefone?`<br>${o.telefone}`:''}</div>
+    <div class="box"><div class="lbl">Veículo</div><strong>${o.modelo}</strong>${o.ano?' ('+o.ano+')':''}<br><span class="plate">${o.placa}</span>${o.km?' KM: '+o.km:''}</div>
+  </div>
+  ${o.queixa||o.diag?`<div class="box" style="margin-bottom:14px">${o.queixa?`<div class="lbl">Problema Relatado</div><p>${o.queixa}</p>`:''}${o.diag?`<div class="lbl" style="margin-top:6px">Diagnóstico</div><p>${o.diag}</p>`:''}</div>`:''}
+  <div class="lbl">Serviços &amp; Peças Orçados</div>
+  <table><thead><tr><th>Descrição</th><th>Qtd</th><th>Valor Unit.</th><th>Tipo</th><th>Total</th></tr></thead>
+  <tbody>${(o.svcs||[]).map(s=>`<tr><td>${s.desc}</td><td>${s.qty}</td><td>R$ ${fmt(s.val)}</td><td>${s.tpLabel||TP_LABEL[s.tp]||s.tp}</td><td>R$ ${fmt(s.total)}</td></tr>`).join('')}
+  ${tpT.sta>0?`<tr class="tot-row"><td colspan="3"></td><td>Serv. Técnico Automotivo</td><td>R$ ${fmt(tpT.sta)}</td></tr>`:''}
+  ${tpT.pca>0?`<tr class="tot-row"><td colspan="3"></td><td>Peças</td><td>R$ ${fmt(tpT.pca)}</td></tr>`:''}
+  ${tpT.ret>0?`<tr class="tot-row"><td colspan="3"></td><td>Retífica</td><td>R$ ${fmt(tpT.ret)}</td></tr>`:''}
+  ${tpT.out>0?`<tr class="tot-row"><td colspan="3"></td><td>Outros</td><td>R$ ${fmt(tpT.out)}</td></tr>`:''}
+  <tr class="tot-row"><td colspan="3"></td><td><strong>VALOR TOTAL</strong></td><td><strong>R$ ${fmt(o.total)}</strong></td></tr>
+  </tbody></table>
+  <div class="validade">📅 <strong>Orçamento válido até ${validade}</strong> (7 dias). Valores sujeitos a alteração após esse prazo.</div>
+  <div class="aprovacao">Aprovo a execução dos serviços descritos acima conforme valores apresentados.</div>
+  <div class="sig">
+    <div class="sig-line">Monster Garage</div>
+    <div class="sig-line">Assinatura do Cliente — Aprovação</div>
+  </div>
+  <script>window.print();setTimeout(()=>window.close(),600);<\/script>
+  </body></html>`);
+  w.document.close();
+}
 
 function printOS(o){
   const tpT={sta:0,pca:0,ret:0,out:0};
